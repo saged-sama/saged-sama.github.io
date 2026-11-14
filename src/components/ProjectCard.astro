@@ -1,28 +1,49 @@
 ---
-/** A project in a grid: showcase cover, title, summary and categories; links to its page. */
+/**
+ * A project as a card: the cover on a glowing stage, then title, summary and categories; the whole
+ * card links to the project. `feature` lays it out wide (text beside the cover) for the lead project.
+ */
 import type { CollectionEntry } from 'astro:content';
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right';
 import FolderCode from '@lucide/astro/icons/folder-code';
 import Showcase from './Showcase.astro';
 import Tags from './Tags.astro';
 
-type Props = { project: CollectionEntry<'projects'> };
-const { id, data } = Astro.props.project;
+type Props = { project: CollectionEntry<'projects'>; feature?: boolean };
+const { project, feature = false } = Astro.props;
+const { id, data } = project;
 ---
 
-<article class="group relative flex flex-col gap-3">
-	{
-		data.cover ? (
-			<Showcase src={data.cover} alt={data.coverAlt ?? data.title} />
-		) : (
-			<div class="grid aspect-16/10 place-items-center rounded-xl bg-muted text-muted-foreground">
-				<FolderCode class="size-10" />
-			</div>
-		)
-	}
-	<h3 class="text-lg font-semibold">
-		<!-- The link covers the whole card. -->
-		<a href={`/projects/${id}/`} class="after:absolute after:inset-0 group-hover:underline">{data.title}</a>
-	</h3>
-	{data.summary && <p class="line-clamp-3 text-sm text-muted-foreground">{data.summary}</p>}
-	<Tags items={data.categories} />
+<article
+	class:list={[
+		'surface group relative grid overflow-hidden transition-[border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-brand-2/50',
+		feature && 'sm:col-span-full md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]'
+	]}
+>
+	<div class:list={['stage-glow', feature && 'md:order-last md:flex md:items-center']}>
+		<div class="w-full">
+		{
+			data.cover ? (
+				<Showcase src={data.cover} alt={data.coverAlt ?? data.title} size={feature ? 'hero' : 'card'} />
+			) : (
+				<div class="grid aspect-16/10 place-items-center text-muted-foreground">
+					<FolderCode class="size-10" />
+				</div>
+			)
+		}
+		</div>
+	</div>
+	<div class:list={['grid content-start gap-3 p-6', feature && 'md:content-center md:p-10']}>
+		{data.featured && feature && <p class="eyebrow">Featured project</p>}
+		<h3 class:list={[feature && 'text-2xl sm:text-3xl']}>
+			<!-- The link covers the whole card. -->
+			<a href={`/projects/${id}/`} class="after:absolute after:inset-0">{data.title}</a>
+		</h3>
+		{data.summary && <p class:list={['text-pretty text-muted-foreground', !feature && 'line-clamp-3 text-sm']}>{data.summary}</p>}
+		<Tags items={data.categories} class="mt-1" />
+	</div>
+	<ArrowUpRight
+		class="absolute top-4 right-4 size-5 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-highlight group-hover:opacity-100"
+		aria-hidden="true"
+	/>
 </article>

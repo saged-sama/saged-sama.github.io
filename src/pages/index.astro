@@ -1,35 +1,34 @@
 ---
 import { getImage } from 'astro:assets';
 import PageLayout from '@/layouts/PageLayout.astro';
-import About from '@/components/About.astro';
-import Intro from '@/components/Intro.astro';
-import PostCard from '@/components/PostCard.astro';
-import ProjectCard from '@/components/ProjectCard.astro';
+import CareerList from '@/components/CareerList.astro';
+import Hero from '@/components/Hero.astro';
+import PostList from '@/components/PostList.astro';
+import ProjectGrid from '@/components/ProjectGrid.astro';
 import Section from '@/components/Section.astro';
 import SkillGroups from '@/components/SkillGroups.astro';
-import SocialLinks from '@/components/SocialLinks.astro';
 import TestimonialCard from '@/components/TestimonialCard.astro';
-import Timeline from '@/components/Timeline.astro';
 import { list, posts, profile, projects } from '@/lib/content';
-import { fromAchievement, fromEducation, fromExperience, fromLifeEvent } from '@/lib/timeline';
+import { fromExperience } from '@/lib/timeline';
 
+/*
+ * The home page is a welcome, not a CV: who I am, what I've made, what I write, and a glance at
+ * where I've worked. The full story (bio, timeline, education, achievements) is on /about.
+ */
 const me = await profile();
-const [experience, education, achievements, lifeEvents, skills, testimonials, allProjects, allPosts] =
-	await Promise.all([
-		list('experience'),
-		list('education'),
-		list('achievements'),
-		list('lifeEvents'),
-		list('skills'),
-		list('testimonials'),
-		projects(),
-		posts()
-	]);
+const [experience, skills, testimonials, allProjects, allPosts] = await Promise.all([
+	list('experience'),
+	list('skills'),
+	list('testimonials'),
+	projects(),
+	posts()
+]);
 
-const HOME_PROJECTS = 4;
+const HOME_PROJECTS = 3;
 const HOME_POSTS = 3;
+// Current roles first, then the rest by the order set in the admin.
+const roles = [...experience].sort((a, b) => Number(b.data.current) - Number(a.data.current)).map(fromExperience);
 
-const description = me.seo.description ?? me.shortBio ?? me.headline;
 const photo = me.avatar ? await getImage({ src: me.avatar, width: 400 }) : undefined;
 const person = {
 	'@context': 'https://schema.org',
@@ -44,69 +43,58 @@ const person = {
 
 <PageLayout
 	title={me.seo.title ?? (me.headline ? `${me.name} · ${me.headline}` : me.name)}
-	description={description}
+	description={me.seo.description ?? me.shortBio ?? me.headline}
 	image={me.seo.image ?? me.avatar}
 	type="profile"
 	jsonLd={person}
 >
-	<Intro />
-
-	{me.bio && <Section id="about" title="About"><About /></Section>}
+	<Hero />
 
 	{
 		allProjects.length > 0 && (
-			<Section id="projects" title="Projects" href={allProjects.length > HOME_PROJECTS ? '/projects/' : undefined}>
-				<div class="grid gap-x-8 gap-y-12 sm:grid-cols-2">
-					{allProjects.slice(0, HOME_PROJECTS).map((project) => <ProjectCard project={project} />)}
-				</div>
-			</Section>
-		)
-	}
-
-	{experience.length > 0 && <Section id="experience" title="Experience"><Timeline entries={experience.map(fromExperience)} /></Section>}
-
-	{skills.length > 0 && <Section id="skills" title="Skills"><SkillGroups /></Section>}
-
-	{education.length > 0 && <Section id="education" title="Education"><Timeline entries={education.map(fromEducation)} /></Section>}
-
-	{
-		achievements.length > 0 && (
-			<Section id="achievements" title="Achievements">
-				<Timeline entries={achievements.map(fromAchievement)} />
+			<Section
+				id="work"
+				eyebrow="Selected work"
+				title="Things I’ve built"
+				href={allProjects.length > HOME_PROJECTS ? '/projects/' : undefined}
+				hrefLabel="All projects"
+			>
+				<ProjectGrid projects={allProjects.slice(0, HOME_PROJECTS)} />
 			</Section>
 		)
 	}
 
 	{
 		allPosts.length > 0 && (
-			<Section id="blog" title="Latest posts" href="/blog/" hrefLabel="All posts">
-				<div class="-mx-3 grid gap-2">
-					{allPosts.slice(0, HOME_POSTS).map((post) => <PostCard post={post} />)}
-				</div>
+			<Section id="writing" eyebrow="Writing" title="Notes & essays" href="/blog/" hrefLabel="All posts">
+				<PostList posts={allPosts.slice(0, HOME_POSTS)} />
 			</Section>
 		)
 	}
 
-	<!-- {lifeEvents.length > 0 && <Section id="journey" title="Journey"><Timeline entries={lifeEvents.map(fromLifeEvent)} /></Section>} -->
+	{
+		roles.length > 0 && (
+			<Section id="experience" eyebrow="Experience" title="Where I’ve worked" href="/about/#experience" hrefLabel="The full story">
+				<CareerList entries={roles} />
+			</Section>
+		)
+	}
+
+	{
+		skills.length > 0 && (
+			<Section id="toolbox" eyebrow="Toolbox" title="What I work with">
+				<SkillGroups />
+			</Section>
+		)
+	}
 
 	{
 		testimonials.length > 0 && (
-			<Section id="testimonials" title="Kind words">
+			<Section id="testimonials" eyebrow="Kind words" title="What people say">
 				<div class="grid gap-4 sm:grid-cols-2">
 					{testimonials.map((t) => <TestimonialCard testimonial={t} />)}
 				</div>
 			</Section>
 		)
 	}
-
-	<!-- <Section id="contact" title="Get in touch">
-		{
-			me.email && (
-				<p class="mb-4">
-					Email me at <a href={`mailto:${me.email}`} class="font-medium underline underline-offset-4">{me.email}</a>
-				</p>
-			)
-		}
-		<SocialLinks labels />
-	</Section> -->
 </PageLayout>

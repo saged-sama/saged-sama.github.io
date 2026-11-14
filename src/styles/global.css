@@ -4,6 +4,7 @@
 @import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
 @import "./theme.css";
+@import "./brand.css";
 @import "./rich-content.css";
 @import "./showcase.css";
 
@@ -51,13 +52,16 @@
         @apply font-mono text-sm;
     }
     h1 {
-        @apply font-bold text-4xl tracking-tight text-balance;
+        @apply text-4xl font-semibold tracking-tight text-balance sm:text-5xl;
     }
     h2 {
-        @apply font-semibold text-3xl tracking-tight text-balance;
+        @apply text-2xl font-semibold tracking-tight text-balance sm:text-3xl;
     }
     h3 {
-        @apply font-semibold text-2xl text-balance;
+        @apply text-lg font-semibold tracking-tight text-balance;
+    }
+    a {
+        @apply transition-colors;
     }
 }
 

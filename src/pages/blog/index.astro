@@ -1,20 +1,14 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import PostCard from '@/components/PostCard.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import PostList from '@/components/PostList.astro';
 import { posts, profile } from '@/lib/content';
 
 const [me, all] = await Promise.all([profile(), posts()]);
+const description = 'Notes and essays on whatever I’m curious about.';
 ---
 
-<PageLayout title={`Blog · ${me.name}`} description={`Posts by ${me.name}.`}>
-	<h1>Blog</h1>
-	{
-		all.length ? (
-			<div class="-mx-3 mt-8 grid gap-2">
-				{all.map((post) => <PostCard post={post} />)}
-			</div>
-		) : (
-			<p class="mt-8 text-muted-foreground">No posts yet.</p>
-		)
-	}
+<PageLayout title={`Writing · ${me.name}`} description={description}>
+	<PageHeader eyebrow="Writing" title="Notes & essays" description={description} />
+	{all.length ? <PostList posts={all} /> : <p class="text-muted-foreground">No posts yet.</p>}
 </PageLayout>

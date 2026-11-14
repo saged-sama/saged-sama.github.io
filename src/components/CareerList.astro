@@ -1,0 +1,31 @@
+---
+/** A compact list of roles (logo, title, organization, years), one line each; details live on /about. */
+import Icon from './Icon.astro';
+import Img from '@/components/Img.astro';
+import type { TimelineEntry } from '@/lib/timeline';
+
+type Props = { entries: TimelineEntry[] };
+const { entries } = Astro.props;
+---
+
+<ul class="surface divide-y overflow-hidden p-0">
+	{
+		entries.map((entry) => (
+			<li class="flex items-start gap-4 sm:items-center px-5 py-4 transition-colors hover:bg-muted/40">
+				<div class="grid size-10 shrink-0 place-items-center overflow-hidden rounded-xl border bg-background text-muted-foreground">
+					{entry.logo ? (
+						<Img src={entry.logo} alt="" width={40} height={40} densities={[1, 2]} class="size-full object-cover" />
+					) : (
+						<Icon name={entry.icon} fallback="lucide:circle" class="size-4" />
+					)}
+				</div>
+				<div class="min-w-0 flex-1">
+					<p class="truncate font-medium">{entry.title}</p>
+					{entry.subtitle && <p class="truncate text-sm text-muted-foreground">{entry.subtitle}</p>}
+					<p class="num text-sm text-muted-foreground sm:hidden">{entry.period}</p>
+				</div>
+				<p class="num shrink-0 text-right text-sm text-muted-foreground max-sm:hidden">{entry.period}</p>
+			</li>
+		))
+	}
+</ul>

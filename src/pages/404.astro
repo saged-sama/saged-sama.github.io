@@ -1,14 +1,15 @@
 ---
 import House from '@lucide/astro/icons/house';
 import PageLayout from '@/layouts/PageLayout.astro';
+import { cn } from 'cn';
 import { buttonVariants } from '@/components/ui/button';
 ---
 
 <PageLayout title="Page not found" noindex>
-	<div class="mx-auto grid max-w-md justify-items-center gap-3 py-24 text-center">
-		<p class="num text-sm text-muted-foreground">Error 404</p>
-		<h1 class="text-2xl">This page doesn’t exist</h1>
+	<div class="hero-glow mx-auto grid max-w-md justify-items-center gap-4 py-24 text-center">
+		<p class="text-gradient num text-8xl font-semibold tracking-tighter">404</p>
+		<h1 class="text-2xl sm:text-3xl">This page wandered off</h1>
 		<p class="text-pretty text-muted-foreground">The link may be broken, or the page was moved or removed.</p>
-		<a href="/" class={`mt-4 ${buttonVariants()}`}><House />Go home</a>
+		<a href="/" class={cn(buttonVariants({ size: 'lg' }), 'mt-4 rounded-full px-5')}><House />Back home</a>
 	</div>
 </PageLayout>

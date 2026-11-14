@@ -12,10 +12,12 @@ type Props = { entry: TimelineEntry };
 const { entry } = Astro.props;
 ---
 
-<li class="relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-4 pb-8 last:pb-0">
-	<!-- The rail between markers. -->
-	<span class="absolute top-11 bottom-1 left-5 w-px -translate-x-1/2 bg-border" aria-hidden="true"></span>
-	<div class="grid size-10 place-items-center overflow-hidden rounded-full border bg-card text-muted-foreground">
+<li class="group/item relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 pb-10 last:pb-0">
+	<!-- The rail between markers: brand-tinted, fading toward the next entry. -->
+	<span
+		class="absolute top-12 bottom-2 left-5 w-px -translate-x-1/2 bg-linear-to-b from-brand-2/60 to-border group-last/item:hidden"
+		aria-hidden="true"></span>
+	<div class="grid size-10 place-items-center overflow-hidden rounded-xl border bg-card text-highlight shadow-sm">
 		{
 			entry.logo ? (
 				<Img src={entry.logo} alt="" width={40} height={40} densities={[1, 2]} class="size-full object-cover" />

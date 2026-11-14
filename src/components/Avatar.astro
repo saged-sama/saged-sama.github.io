@@ -1,22 +1,35 @@
 ---
 /**
- * The owner's photo as a circle; clicking it opens the full photo over the page. Uses the HTML
- * popover attribute, so it works without JavaScript (click outside or Escape closes it).
+ * The owner's photo in a gradient ring; clicking it opens the full photo over the page. Uses the
+ * HTML popover attribute, so it works without JavaScript (click outside or Escape closes it).
  */
 import Img from '@/components/Img.astro';
 
-type Props = { src: ImageMetadata; alt: string };
-const { src, alt } = Astro.props;
+type Props = { src: ImageMetadata; alt: string; size?: 'md' | 'lg' };
+const { src, alt, size = 'lg' } = Astro.props;
+const px = size === 'lg' ? 176 : 112;
 ---
 
-<button
-	type="button"
-	popovertarget="avatar-full"
-	class="shrink-0 cursor-zoom-in rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-	aria-label={`Show larger photo: ${alt}`}
->
-	<Img src={src} alt={alt} width={112} height={112} densities={[1, 2]} loading="eager" class="size-28 rounded-full object-cover" />
-</button>
+<div class="relative shrink-0">
+	<!-- Glow behind the photo. -->
+	<div class="absolute -inset-6 rounded-full bg-(--glow) blur-2xl" aria-hidden="true"></div>
+	<button
+		type="button"
+		popovertarget="avatar-full"
+		class="relative block cursor-zoom-in rounded-full bg-(image:--brand-gradient) p-[3px] outline-offset-4 transition-transform hover:scale-[1.02]"
+		aria-label={`Show larger photo: ${alt}`}
+	>
+		<Img
+			src={src}
+			alt={alt}
+			width={px}
+			height={px}
+			densities={[1, 2]}
+			loading="eager"
+			class:list={['rounded-full border-4 border-background object-cover', size === 'lg' ? 'size-36 sm:size-44' : 'size-28']}
+		/>
+	</button>
+</div>
 
 <div
 	id="avatar-full"
@@ -24,12 +37,6 @@ const { src, alt } = Astro.props;
 	class="m-auto max-h-[90dvh] max-w-[min(90vw,40rem)] overflow-visible bg-transparent p-0 backdrop:bg-background/80 backdrop:backdrop-blur-sm"
 >
 	<button type="button" popovertarget="avatar-full" popovertargetaction="hide" class="block cursor-zoom-out" aria-label="Close photo">
-		<Img
-			src={src}
-			alt={alt}
-			widths={[480, 960]}
-			sizes="min(90vw, 40rem)"
-			class="max-h-[90dvh] w-auto rounded-2xl object-contain shadow-2xl"
-		/>
+		<Img src={src} alt={alt} widths={[480, 960]} sizes="min(90vw, 40rem)" class="max-h-[90dvh] w-auto rounded-3xl object-contain shadow-2xl" />
 	</button>
 </div>

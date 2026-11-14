@@ -1,11 +1,17 @@
 ---
 /**
  * Long-form text: synced rich-text HTML (`html`) or rendered Markdown (slot). Typography comes
- * from the typography plugin; rich-content.css adds math, code, aligned media and colors.
+ * from the typography plugin, tinted with the brand; rich-content.css adds math, code, aligned
+ * media and colors.
  */
 type Props = { html?: string; class?: string };
 const { html, class: className = '' } = Astro.props;
-const classes = `rich-content prose max-w-none dark:prose-invert prose-a:underline-offset-4 ${className}`;
+const classes = [
+	'rich-content prose max-w-none dark:prose-invert',
+	'prose-headings:tracking-tight prose-a:text-highlight prose-a:underline-offset-4 prose-a:decoration-highlight/40 hover:prose-a:decoration-highlight',
+	'prose-blockquote:border-l-brand-2 prose-img:rounded-xl prose-pre:rounded-xl prose-pre:border',
+	className
+].join(' ');
 ---
 
 {html ? <div class={classes} set:html={html} /> : <div class={classes}><slot /></div>}

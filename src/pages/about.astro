@@ -1,0 +1,63 @@
+---
+/** The full story: bio, then experience, education, achievements and milestones in detail. */
+import PageLayout from '@/layouts/PageLayout.astro';
+import About from '@/components/About.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import Section from '@/components/Section.astro';
+import SkillGroups from '@/components/SkillGroups.astro';
+import Timeline from '@/components/Timeline.astro';
+import { list, profile } from '@/lib/content';
+import { fromAchievement, fromEducation, fromExperience, fromLifeEvent } from '@/lib/timeline';
+
+const me = await profile();
+const [experience, education, achievements, lifeEvents, skills] = await Promise.all([
+	list('experience'),
+	list('education'),
+	list('achievements'),
+	list('lifeEvents'),
+	list('skills')
+]);
+const firstName = me.name.split(' ')[0];
+---
+
+<PageLayout title={`About · ${me.name}`} description={me.shortBio ?? `About ${me.name}.`} image={me.avatar}>
+	<PageHeader eyebrow="About" title={`A little about ${firstName}`} description={me.headline} />
+
+	{me.bio && <About />}
+
+	{
+		experience.length > 0 && (
+			<Section id="experience" eyebrow="Experience" title="Where I’ve worked">
+				<Timeline entries={experience.map(fromExperience)} />
+			</Section>
+		)
+	}
+	{
+		education.length > 0 && (
+			<Section id="education" eyebrow="Education" title="Where I’ve studied">
+				<Timeline entries={education.map(fromEducation)} />
+			</Section>
+		)
+	}
+	{
+		achievements.length > 0 && (
+			<Section id="achievements" eyebrow="Achievements" title="Things I’m proud of">
+				<Timeline entries={achievements.map(fromAchievement)} />
+			</Section>
+		)
+	}
+	{
+		lifeEvents.length > 0 && (
+			<Section id="journey" eyebrow="Journey" title="Milestones along the way">
+				<Timeline entries={lifeEvents.map(fromLifeEvent)} />
+			</Section>
+		)
+	}
+	{
+		skills.length > 0 && (
+			<Section id="toolbox" eyebrow="Toolbox" title="What I work with">
+				<SkillGroups />
+			</Section>
+		)
+	}
+</PageLayout>

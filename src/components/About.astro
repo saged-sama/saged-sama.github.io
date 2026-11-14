@@ -1,35 +1,51 @@
 ---
-/** The long bio, with languages and hobbies beside it. */
+/** The long bio, with a card of quick facts (photo, location, languages, hobbies) beside it. */
+import Img from '@/components/Img.astro';
 import Prose from './Prose.astro';
 import Tags from './Tags.astro';
 import { profile } from '@/lib/content';
 
-const { bio, languages, hobbies } = await profile();
-const level = (text?: string) => (text ? ` (${text})` : '');
+const me = await profile();
+const level = (text?: string) => (text ? ` · ${text}` : '');
+const facts = [
+	{ label: 'Based in', value: me.location },
+	{ label: 'Pronouns', value: me.pronouns }
+].filter((f) => f.value);
 ---
 
-<div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_14rem]">
-	<Prose html={bio} />
-	<dl class="grid content-start gap-5 text-sm">
+<div class="grid gap-10 md:grid-cols-[minmax(0,1fr)_16rem]">
+	<Prose html={me.bio} class="text-lg/8" />
+	<aside class="surface grid content-start gap-5 p-5 md:sticky md:top-24 md:self-start">
 		{
-			languages.length > 0 && (
-				<div>
-					<dt class="mb-2 font-medium text-muted-foreground">Languages</dt>
-					<dd>
-						<Tags items={languages.map((l) => `${l.name}${level(l.level)}`)} variant="outline" />
-					</dd>
-				</div>
+			me.avatar && (
+				<Img src={me.avatar} alt={me.avatarAlt ?? me.name} widths={[256, 512]} sizes="16rem" class="aspect-square w-full rounded-xl object-cover" />
 			)
 		}
-		{
-			hobbies.length > 0 && (
-				<div>
-					<dt class="mb-2 font-medium text-muted-foreground">Hobbies</dt>
-					<dd>
-						<Tags items={hobbies} variant="outline" />
-					</dd>
-				</div>
-			)
-		}
-	</dl>
+		<dl class="grid gap-4 text-sm">
+			{
+				facts.map((f) => (
+					<div>
+						<dt class="text-muted-foreground">{f.label}</dt>
+						<dd class="font-medium">{f.value}</dd>
+					</div>
+				))
+			}
+			{
+				me.languages.length > 0 && (
+					<div>
+						<dt class="mb-2 text-muted-foreground">Languages</dt>
+						<dd><Tags items={me.languages.map((l) => `${l.name}${level(l.level)}`)} variant="outline" /></dd>
+					</div>
+				)
+			}
+			{
+				me.hobbies.length > 0 && (
+					<div>
+						<dt class="mb-2 text-muted-foreground">Away from the keyboard</dt>
+						<dd><Tags items={me.hobbies} variant="outline" /></dd>
+					</div>
+				)
+			}
+		</dl>
+	</aside>
 </div>

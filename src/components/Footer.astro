@@ -1,15 +1,25 @@
 ---
+/** Site footer: logo with a short line, the main links, social links and copyright. */
+import Logo from './Logo.astro';
 import SocialLinks from './SocialLinks.astro';
 import { profile } from '@/lib/content';
+import { navLinks } from '@/lib/nav';
 
-const { name } = await profile();
+const { name, headline, location, resume } = await profile();
+const line = [headline, location].filter(Boolean).join(' · ');
 ---
 
-<footer class="border-t">
-	<div
-		class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:px-6"
-	>
-		<p>© <span class="num">{new Date().getFullYear()}</span> {name}</p>
-		<SocialLinks />
+<footer class="mt-16 border-t">
+	<div class="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:grid-cols-[1fr_auto] sm:px-6">
+		<div class="grid content-start gap-3">
+			<Logo name={name} />
+			{line && <p class="text-sm text-muted-foreground">{line}</p>}
+		</div>
+		<nav aria-label="Footer" class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground sm:justify-end">
+			{navLinks(resume).map((link) => <a href={link.href} class="hover:text-foreground">{link.label}</a>)}
+			<a href="/rss.xml" class="hover:text-foreground">RSS</a>
+		</nav>
+		<p class="num text-sm text-muted-foreground">© {new Date().getFullYear()} {name}</p>
+		<SocialLinks class="-mr-2 sm:justify-end" />
 	</div>
 </footer>

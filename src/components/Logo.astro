@@ -1,0 +1,13 @@
+---
+/**
+ * The brand mark (public/sajid.svg) with the owner's name: the home link in header and footer.
+ * `compact` shows only the mark on phones (the name stays for screen readers).
+ */
+type Props = { name: string; compact?: boolean; class?: string };
+const { name, compact = false, class: className = '' } = Astro.props;
+---
+
+<a href="/" class={`group inline-flex min-w-0 items-center gap-2.5 font-semibold tracking-tight ${className}`}>
+	<img src="/sajid.svg" alt="" width="28" height="28" class="size-7 shrink-0 transition-transform group-hover:-rotate-6" />
+	<span class:list={['truncate', compact && 'max-sm:sr-only']}>{name}</span>
+</a>

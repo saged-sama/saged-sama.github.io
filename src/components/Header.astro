@@ -1,31 +1,29 @@
 ---
-/** Site header: name (home link), main navigation and the theme switch. */
+/** Site header: logo (home link), main navigation and the theme switch. */
+import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { profile } from '@/lib/content';
+import { isCurrent, navLinks } from '@/lib/nav';
 
 const { name, resume } = await profile();
 const path = Astro.url.pathname;
-
-const links = [
-	{ href: '/projects/', label: 'Projects' },
-	{ href: '/blog/', label: 'Blog' },
-	...(resume ? [{ href: resume, label: 'Résumé' }] : [])
-];
-const isCurrent = (href: string) => href.startsWith('/') && path.startsWith(href);
 ---
 
-<header class="sticky top-0 z-40 bg-background/80 backdrop-blur">
-	<div class="mx-auto flex h-14 max-w-5xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
-		<a href="/" class="mr-auto min-w-0 truncate font-semibold tracking-tight">{name}</a>
-		<nav aria-label="Main" class="flex shrink-0 items-center text-sm sm:gap-1">
+<header class="sticky top-0 z-40 bg-background/75 backdrop-blur-md">
+	<div class="mx-auto flex h-16 max-w-5xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
+		<Logo name={name} compact class="mr-auto" />
+		<nav aria-label="Main" class="flex shrink-0 items-center text-sm">
 			{
-				links.map((link) => (
+				navLinks(resume).map((link) => (
 					<a
 						href={link.href}
-						aria-current={isCurrent(link.href) ? 'page' : undefined}
-						class="rounded-md px-2 py-1.5 whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground aria-[current=page]:text-foreground"
+						aria-current={isCurrent(link.href, path) ? 'page' : undefined}
+						class="relative rounded-full px-2 py-1.5 whitespace-nowrap text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground sm:px-3"
 					>
 						{link.label}
+						{isCurrent(link.href, path) && (
+							<span class="absolute inset-x-2 -bottom-0.5 h-px bg-(image:--brand-gradient) sm:inset-x-3" aria-hidden="true" />
+						)}
 					</a>
 				))
 			}

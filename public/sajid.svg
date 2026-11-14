@@ -4,9 +4,9 @@
   <defs>
     <linearGradient id="gradient"
       x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="50%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#FFFFFF"/>
+      <stop offset="0%" stop-color="#C4A7FF"/>
+      <stop offset="50%" stop-color="#9270FF"/>
+      <stop offset="100%" stop-color="#5D3BCE"/>
     </linearGradient>
   </defs>
 
@@ -21,6 +21,6 @@
         fill="none" stroke="url(#gradient)"
         stroke-width="11" stroke-linecap="round"/>
 
-  <circle cx="91" cy="36" r="4" fill="#FFFFFF"/>
-  <circle cx="32" cy="93" r="4" fill="#FFFFFF"/>
+  <circle cx="91" cy="36" r="4" fill="#D8C7FF"/>
+  <circle cx="32" cy="93" r="4" fill="#9270FF"/>
 </svg>

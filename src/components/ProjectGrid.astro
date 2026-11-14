@@ -1,0 +1,12 @@
+---
+/** Projects as cards; the first one is shown wide as the lead. */
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+type Props = { projects: CollectionEntry<'projects'>[] };
+const { projects } = Astro.props;
+---
+
+<div class="grid gap-5 sm:grid-cols-2">
+	{projects.map((project, i) => <ProjectCard project={project} feature={i === 0} />)}
+</div>

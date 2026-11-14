@@ -1,31 +1,38 @@
 ---
-/** A post in a list: small cover on the left, then title, date and summary. */
+/**
+ * A post in a list, magazine style: date on the left, title and summary, thumbnail on the right.
+ * Rows are separated by hairlines (see PostList.astro); the whole row links to the post.
+ */
 import type { CollectionEntry } from 'astro:content';
 import Img from '@/components/Img.astro';
-import PostMeta from './PostMeta.astro';
+import { formatDate, isoDay } from '@/lib/dates';
+import { readingTime } from '@/lib/reading-time';
 
 type Props = { post: CollectionEntry<'blog'> };
 const { post } = Astro.props;
 const { id, data } = post;
 ---
 
-<article class="group relative flex gap-4 rounded-xl p-3 transition-colors hover:bg-muted/50 sm:gap-5">
+<article class="group relative grid gap-x-8 gap-y-2 py-7 sm:grid-cols-[8rem_minmax(0,1fr)_auto]">
+	<p class="num pt-1 text-sm text-muted-foreground">
+		<time datetime={isoDay(data.date)}>{formatDate(data.date)}</time>
+	</p>
+	<div class="grid content-start gap-2">
+		<h3 class="text-xl group-hover:text-highlight">
+			<a href={`/blog/${id}/`} class="after:absolute after:inset-0">{data.title}</a>
+		</h3>
+		{data.summary && <p class="line-clamp-2 text-pretty text-muted-foreground">{data.summary}</p>}
+		<p class="num text-sm text-muted-foreground">{readingTime(post)} min read</p>
+	</div>
 	{
 		data.cover && (
 			<Img
 				src={data.cover}
 				alt=""
-				widths={[160, 320]}
-				sizes="(width < 640px) 6rem, 10rem"
-				class="aspect-4/3 w-24 shrink-0 rounded-lg object-cover sm:w-40"
+				widths={[200, 400]}
+				sizes="10rem"
+				class="aspect-4/3 w-40 rounded-xl border object-cover transition-transform duration-300 group-hover:scale-[1.02] max-sm:row-start-1 max-sm:w-full max-sm:aspect-video"
 			/>
 		)
 	}
-	<div class="min-w-0">
-		<h3 class="text-lg font-semibold">
-			<a href={`/blog/${id}/`} class="after:absolute after:inset-0 group-hover:underline">{data.title}</a>
-		</h3>
-		<PostMeta post={post} class="mt-1" />
-		{data.summary && <p class="mt-2 line-clamp-2 text-sm text-muted-foreground">{data.summary}</p>}
-	</div>
 </article>

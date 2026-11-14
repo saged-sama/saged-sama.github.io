@@ -1,5 +1,5 @@
 /* Brand details shared by the site's components: gradient text, card surfaces, eyebrow labels,
-   the hero's glow, and a gentle entrance motion. Tokens come from theme.css. */
+   and the hero's glow. Tokens come from theme.css. */
 
 /* Text painted with the brand gradient (the name, accents). */
 @utility text-gradient {
@@ -54,18 +54,6 @@
         linear-gradient(to bottom, transparent, color-mix(in oklab, var(--muted) 70%, transparent));
 }
 
-/* Elements that rise into place on load; `--i` staggers them (style="--i: 2"). */
-@utility rise {
-    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-    animation-delay: calc(var(--i, 0) * 80ms);
-}
-@keyframes rise {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-}
-
 @layer base {
     ::selection {
         background-color: color-mix(in oklab, var(--brand-2) 30%, transparent);
@@ -77,11 +65,5 @@
         html {
             scroll-behavior: smooth;
         }
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .rise {
-        animation: none;
     }
 }

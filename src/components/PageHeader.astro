@@ -5,8 +5,8 @@ const { eyebrow, title, description } = Astro.props;
 ---
 
 <header class="hero-glow grid gap-3 pt-8 pb-10 sm:pt-14">
-	<p class="eyebrow rise">{eyebrow}</p>
-	<h1 class="rise" style="--i: 1">{title}</h1>
-	{description && <p class="rise max-w-2xl text-lg text-pretty text-muted-foreground" style="--i: 2">{description}</p>}
+	<p class="eyebrow">{eyebrow}</p>
+	<h1>{title}</h1>
+	{description && <p class="max-w-2xl text-lg text-pretty text-muted-foreground">{description}</p>}
 	<slot />
 </header>

@@ -6,7 +6,7 @@
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
     --color-highlight: var(--highlight);
     --color-live: var(--live);
     --color-brand-1: var(--brand-1);

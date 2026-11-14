@@ -15,7 +15,7 @@ const firstName = me.name.split(' ')[0];
 
 <section aria-label="Introduction" class="hero-glow grid items-center gap-10 pt-10 pb-16 sm:pt-20 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
 	<div class="grid gap-6">
-		<div class="rise flex flex-wrap items-center gap-2 text-sm">
+		<div class="flex flex-wrap items-center gap-2 text-sm">
 			{
 				me.openToWork && (
 					<span class="inline-flex items-center gap-2 rounded-full border bg-card/60 px-3 py-1 font-medium">
@@ -34,14 +34,14 @@ const firstName = me.name.split(' ')[0];
 			}
 		</div>
 
-		<h1 class="rise text-5xl leading-[1.05] font-semibold tracking-tighter sm:text-6xl lg:text-7xl" style="--i: 1">
+		<h1 class="text-5xl leading-[1.05] font-semibold tracking-tighter sm:text-6xl lg:text-7xl">
 			Hi, I’m <span class="text-gradient">{firstName}</span>.
 			{me.shortBio && <span class="block text-muted-foreground">{me.shortBio}</span>}
 		</h1>
 
-		{me.headline && <p class="rise max-w-xl text-lg text-pretty text-muted-foreground" style="--i: 2">{me.headline}</p>}
+		{me.headline && <p class="max-w-xl text-lg text-pretty text-muted-foreground">{me.headline}</p>}
 
-		<div class="rise flex flex-wrap items-center gap-3" style="--i: 3">
+		<div class="flex flex-wrap items-center gap-3">
 			<a href="#work" class={cn(buttonVariants({ size: 'lg' }), 'rounded-full px-5')}>
 				See my work
 				<ArrowDown />
@@ -58,5 +58,5 @@ const firstName = me.name.split(' ')[0];
 		</div>
 	</div>
 
-	{me.avatar && <div class="rise max-md:-order-1" style="--i: 2"><Avatar src={me.avatar} alt={me.avatarAlt ?? me.name} /></div>}
+	{me.avatar && <div class="max-md:-order-1"><Avatar src={me.avatar} alt={me.avatarAlt ?? me.name} /></div>}
 </section>

@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+/* Fonts are self-hosted: a third-party font stylesheet would block the first paint on phones.
+   Inter lives in public/fonts (Latin subset); JetBrains Mono comes from Fontsource. */
+@import "@fontsource-variable/jetbrains-mono/wght.css";
 @import "tailwindcss";
-@import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
 @import "./theme.css";
@@ -23,13 +24,8 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/fonts/InterVariable-Italic.woff2') format('woff2');
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
-}
+/* No separate italic file: the browser slants the regular face, saving a ~200 KB download on
+   every page with italic text. */
 
 @layer base {
     * {

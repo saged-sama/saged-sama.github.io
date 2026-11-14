@@ -1,5 +1,6 @@
 ---
 /** A post inside the docs layout: breadcrumbs, title, meta, cover, text, then previous/next. */
+import 'katex/dist/katex.min.css';
 import Breadcrumbs from './Breadcrumbs.astro';
 import PostPager from './PostPager.astro';
 import Img from '@/components/Img.astro';
@@ -19,9 +20,9 @@ const index = order.findIndex((p) => p.id === post.id);
 <article>
 	<header class="hero-glow grid gap-4 pb-2">
 		<Breadcrumbs trail={trail(tree, topicOf(post))} />
-		<h1 class="rise text-4xl leading-tight sm:text-5xl">{data.title}</h1>
-		{data.summary && <p class="rise text-lg text-pretty text-muted-foreground sm:text-xl" style="--i: 1">{data.summary}</p>}
-		<div class="rise grid gap-3" style="--i: 2">
+		<h1 class="text-4xl leading-tight sm:text-5xl">{data.title}</h1>
+		{data.summary && <p class="text-lg text-pretty text-muted-foreground sm:text-xl">{data.summary}</p>}
+		<div class="grid gap-3">
 			<PostMeta post={post} />
 			<Tags items={data.tags} />
 		</div>
@@ -31,9 +32,10 @@ const index = order.findIndex((p) => p.id === post.id);
 			<Img
 				src={data.cover}
 				alt={data.coverAlt ?? ''}
-				widths={[640, 1280]}
+				widths={[480, 800, 1200]}
 				sizes="(width < 64rem) 100vw, 48rem"
 				loading="eager"
+				fetchpriority="high"
 				class="my-8 w-full rounded-2xl border"
 			/>
 		)

@@ -12,7 +12,7 @@ const px = size === 'lg' ? 176 : 112;
 
 <div class="relative shrink-0">
 	<!-- Glow behind the photo. -->
-	<div class="absolute -inset-6 rounded-full bg-(--glow) blur-2xl" aria-hidden="true"></div>
+	<div class="absolute -inset-10 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]" aria-hidden="true"></div>
 	<button
 		type="button"
 		popovertarget="avatar-full"
@@ -26,6 +26,7 @@ const px = size === 'lg' ? 176 : 112;
 			height={px}
 			densities={[1, 2]}
 			loading="eager"
+			fetchpriority="high"
 			class:list={['rounded-full border-4 border-background object-cover', size === 'lg' ? 'size-36 sm:size-44' : 'size-28']}
 		/>
 	</button>

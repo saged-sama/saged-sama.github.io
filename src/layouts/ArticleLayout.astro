@@ -16,13 +16,13 @@ const { heading, summary, back, ...seo } = Astro.props;
 <PageLayout {...seo}>
 	<article class="mx-auto max-w-3xl">
 		<header class="hero-glow grid gap-4 pt-6 sm:pt-10">
-			<a href={back.href} class="group rise inline-flex w-fit items-center gap-1.5 text-sm text-muted-foreground hover:text-highlight">
+			<a href={back.href} class="group inline-flex w-fit items-center gap-1.5 text-sm text-muted-foreground hover:text-highlight">
 				<ArrowLeft class="size-4 transition-transform group-hover:-translate-x-0.5" />
 				{back.label}
 			</a>
-			<h1 class="rise mt-4 text-4xl leading-tight sm:text-5xl" style="--i: 1">{heading}</h1>
-			{summary && <p class="rise text-lg text-pretty text-muted-foreground sm:text-xl" style="--i: 2">{summary}</p>}
-			<div class="rise grid gap-4" style="--i: 3"><slot name="meta" /></div>
+			<h1 class="mt-4 text-4xl leading-tight sm:text-5xl">{heading}</h1>
+			{summary && <p class="text-lg text-pretty text-muted-foreground sm:text-xl">{summary}</p>}
+			<div class="grid gap-4"><slot name="meta" /></div>
 		</header>
 		<div class="my-10 empty:hidden"><slot name="hero" /></div>
 		<Prose class="text-lg/8"><slot /></Prose>

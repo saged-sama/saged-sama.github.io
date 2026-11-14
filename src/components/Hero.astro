@@ -1,6 +1,6 @@
 ---
 /** The home page's welcome: greeting with the name, what I do, a short line, and where to go next. */
-import ArrowDown from '@lucide/astro/icons/arrow-down';
+import UserRoundPen from '@lucide/astro/icons/user-round-pen';
 import MapPin from '@lucide/astro/icons/map-pin';
 import Rocket from '@lucide/astro/icons/rocket';
 import Avatar from './Avatar.astro';
@@ -42,9 +42,9 @@ const firstName = me.name.split(' ')[0];
 		{me.headline && <p class="max-w-xl text-lg text-pretty text-muted-foreground">{me.headline}</p>}
 
 		<div class="flex flex-wrap items-center gap-3">
-			<a href="#work" class={cn(buttonVariants({ size: 'lg' }), 'px-5')}>
-				See my work
-				<ArrowDown />
+			<a href="/about" class={cn(buttonVariants({ size: 'lg' }), 'px-5')}>
+				<UserRoundPen />
+				View my full profile
 			</a>
 			{
 				me.resume && (

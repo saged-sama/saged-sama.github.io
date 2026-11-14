@@ -1,6 +1,6 @@
 ---
 /** Top of the home page: photo, name, headline, short bio, links and the résumé. */
-import Download from '@lucide/astro/icons/download';
+import Rocket from '@lucide/astro/icons/rocket';
 import MapPin from '@lucide/astro/icons/map-pin';
 import Avatar from './Avatar.astro';
 import SocialLinks from './SocialLinks.astro';
@@ -41,7 +41,7 @@ const me = await profile();
 			{
 				me.resume && (
 					<a href={me.resume} class={buttonVariants({ size: 'sm' })}>
-						<Download />
+						<Rocket />
 						Résumé
 					</a>
 				)

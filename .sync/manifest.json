@@ -41,8 +41,8 @@
       "sha": "ef12ad9a5df7f288226b9223d4401c9d3c3047b4b600e14148393ad163ae651c"
     },
     "data/profile.json": {
-      "version": "f47c4c28ade79adb5629c2753dc25a6d4301293c5b51c8383b583f3e6615772f",
-      "sha": "f47c4c28ade79adb5629c2753dc25a6d4301293c5b51c8383b583f3e6615772f"
+      "version": "4c2d929b3fa4c263b0c553d1b9f3e153ef0651b0160aa0dd342e4799b82fd29d",
+      "sha": "4c2d929b3fa4c263b0c553d1b9f3e153ef0651b0160aa0dd342e4799b82fd29d"
     },
     "data/projects/english360.md": {
       "version": "8e1c3d72f7f29556de789c00985ff34c78095aab9369c0258d7f153fc6c30195",
@@ -107,10 +107,6 @@
     "images/835gewfqv4qd77s.webp": {
       "version": "08f53202_fe74_483f_97e1_cbec5554cf24_bkaxff5hsr.webp",
       "sha": "67df78d0a9365899059c9ac26d5c7edaa91a845b6fceb37526091aeadc7a0256"
-    },
-    "images/922hmli9lia31qc.webp": {
-      "version": "3261dc20_73c3_468b_b580_d9a254e73c6b_ckst8qzh3i.webp",
-      "sha": "db810dca5358d62ebb1f80673bc2b3de181ac4fbcc09ac46d511a1a8c60b4e95"
     },
     "images/cb9jhwu6uv7p476.webp": {
       "version": "screenshot_from_2026_10_30_19_57_48_dd07pmdhwx.webp",

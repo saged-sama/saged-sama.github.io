@@ -6,6 +6,7 @@ import ProjectFacts from '@/components/ProjectFacts.astro';
 import Showcase from '@/components/Showcase.astro';
 import Tags from '@/components/Tags.astro';
 import { projects } from '@/lib/content';
+import { trackItem } from '@/lib/telemetry';
 
 export async function getStaticPaths() {
 	return (await projects()).map((project) => ({ params: { slug: project.id }, props: { project } }));
@@ -25,6 +26,7 @@ const { Content } = await render(project);
 	heading={data.title}
 	summary={data.summary}
 	back={{ href: '/projects/', label: 'All projects' }}
+	track={trackItem('projects', data.adminId)}
 >
 	<Fragment slot="meta">
 		<ProjectFacts project={project} />
@@ -37,7 +39,7 @@ const { Content } = await render(project);
 			data.gallery.length > 0 && (
 				<div class="mt-10 grid gap-3 sm:grid-cols-2">
 					{data.gallery.map((image) => (
-						<Img src={image} alt="" widths={[480, 960]} sizes="(width < 640px) 100vw, 24rem" class="w-full rounded-lg" />
+						<Img src={image} alt="" widths={[480, 960]} sizes="(width < 640px) 100vw, 24rem" class="w-full" />
 					))}
 				</div>
 			)
@@ -46,7 +48,7 @@ const { Content } = await render(project);
 			data.skills.length > 0 && (
 				<div class="mt-10">
 					<h2 class="mb-3 text-base font-medium text-muted-foreground">Built with</h2>
-					<Tags items={data.skills} variant="outline" />
+					<Tags items={data.skills} variant="secondary" />
 				</div>
 			)
 		}

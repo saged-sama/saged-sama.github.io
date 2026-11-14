@@ -10,13 +10,13 @@ const { data } = Astro.props.testimonial;
 const role = [data.authorTitle, data.company].filter(Boolean).join(', ');
 ---
 
-<Card className="h-full">
+<Card className="h-full bg-muted shadow-none ring-0">
 	<CardContent className="grid gap-3">
 		<Quote class="size-5 text-muted-foreground" />
 		<blockquote class="text-pretty">{data.quote}</blockquote>
 	</CardContent>
 	<CardFooter className="mt-auto gap-3">
-		{data.avatar && <Img src={data.avatar} alt="" width={40} height={40} densities={[1, 2]} class="size-10 rounded-full object-cover" />}
+		{data.avatar && <Img src={data.avatar} alt="" width={40} height={40} densities={[1, 2]} class="size-10 object-cover" />}
 		<div class="min-w-0">
 			<p class="font-medium">
 				{data.url ? <a href={data.url} rel="noopener" target="_blank" class="hover:underline">{data.author}</a> : data.author}

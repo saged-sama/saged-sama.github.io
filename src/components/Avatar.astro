@@ -1,6 +1,6 @@
 ---
 /**
- * The owner's photo in a gradient ring; clicking it opens the full photo over the page. Uses the
+ * The owner's photo; clicking it opens the full photo over the page. Uses the
  * HTML popover attribute, so it works without JavaScript (click outside or Escape closes it).
  */
 import Img from '@/components/Img.astro';
@@ -11,12 +11,10 @@ const px = size === 'lg' ? 176 : 112;
 ---
 
 <div class="relative shrink-0">
-	<!-- Glow behind the photo. -->
-	<div class="absolute -inset-10 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]" aria-hidden="true"></div>
 	<button
 		type="button"
 		popovertarget="avatar-full"
-		class="relative block cursor-zoom-in rounded-full bg-(image:--brand-gradient) p-[3px] outline-offset-4 transition-transform hover:scale-[1.02]"
+		class="relative block cursor-zoom-in outline-offset-4 transition-transform hover:scale-[1.02]"
 		aria-label={`Show larger photo: ${alt}`}
 	>
 		<Img
@@ -27,7 +25,7 @@ const px = size === 'lg' ? 176 : 112;
 			densities={[1, 2]}
 			loading="eager"
 			fetchpriority="high"
-			class:list={['rounded-full border-4 border-background object-cover', size === 'lg' ? 'size-36 sm:size-44' : 'size-28']}
+			class:list={['object-cover', size === 'lg' ? 'size-36 sm:size-44' : 'size-28']}
 		/>
 	</button>
 </div>
@@ -35,9 +33,9 @@ const px = size === 'lg' ? 176 : 112;
 <div
 	id="avatar-full"
 	popover
-	class="m-auto max-h-[90dvh] max-w-[min(90vw,40rem)] overflow-visible bg-transparent p-0 backdrop:bg-background/80 backdrop:backdrop-blur-sm"
+	class="m-auto max-h-[90dvh] max-w-[min(90vw,40rem)] overflow-visible bg-transparent p-0 backdrop:bg-background/90"
 >
 	<button type="button" popovertarget="avatar-full" popovertargetaction="hide" class="block cursor-zoom-out" aria-label="Close photo">
-		<Img src={src} alt={alt} widths={[480, 960]} sizes="min(90vw, 40rem)" class="max-h-[90dvh] w-auto rounded-3xl object-contain shadow-2xl" />
+		<Img src={src} alt={alt} widths={[480, 960]} sizes="min(90vw, 40rem)" class="max-h-[90dvh] w-auto object-contain shadow-2xl" />
 	</button>
 </div>

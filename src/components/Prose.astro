@@ -9,7 +9,7 @@ const { html, class: className = '' } = Astro.props;
 const classes = [
 	'rich-content prose max-w-none dark:prose-invert',
 	'prose-headings:tracking-tight prose-a:text-highlight prose-a:underline-offset-4 prose-a:decoration-highlight/40 hover:prose-a:decoration-highlight',
-	'prose-blockquote:border-l-brand-2 prose-img:rounded-xl prose-pre:rounded-xl prose-pre:border',
+	'prose-blockquote:border-l-0 prose-blockquote:bg-muted prose-blockquote:px-4 prose-blockquote:py-1 prose-img:rounded-none prose-pre:rounded-none',
 	className
 ].join(' ');
 ---

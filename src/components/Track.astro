@@ -1,0 +1,78 @@
+---
+/**
+ * Privacy-friendly visit tracking (the site's only JavaScript besides the theme switch): a page
+ * view, then how far the visitor scrolled and how long the page was visible, plus clicks on links
+ * to other sites. No cookies; Do Not Track is respected; nothing runs outside production.
+ *
+ * The view and clicks go out as JSON with `fetch` (a cross-site request the admin allows via CORS).
+ * What's reported on leaving (scroll depth, time) uses `sendBeacon` with an untyped body: browsers
+ * won't make a request that needs a CORS check while the page is going away, and this one doesn't.
+ */
+import { telemetryEndpoint, type TrackTarget } from '@/lib/telemetry';
+
+type Props = { target?: TrackTarget };
+const { target = { collection: 'page' } } = Astro.props;
+const endpoint = telemetryEndpoint();
+---
+
+{
+	endpoint && (
+		<script is:inline define:vars={{ endpoint, collection: target.collection, id: target.id ?? '' }}>
+			(() => {
+				if (navigator.doNotTrack === '1') return;
+				let session = '';
+				try {
+					session = sessionStorage.getItem('t') || Math.random().toString(36).slice(2, 12);
+					sessionStorage.setItem('t', session);
+				} catch {}
+				const payload = (event) =>
+					JSON.stringify({ target_collection: collection, target_id: id, session_id: session, ...event });
+				const send = (event) =>
+					fetch(endpoint, {
+						method: 'POST',
+						mode: 'cors',
+						keepalive: true,
+						headers: { 'content-type': 'application/json' },
+						body: payload(event)
+					}).catch(() => {});
+				// For the moment the page is hidden or unloading.
+				const beacon = (event) => navigator.sendBeacon?.(endpoint, new Blob([payload(event)])) || send(event);
+				const ref = document.referrer && new URL(document.referrer).host !== location.host ? document.referrer : '';
+				// After the page has loaded, so tracking never competes with the page's own content.
+				const view = () => send({ event: 'view', path: location.pathname, referrer: ref });
+				if (document.readyState === 'complete') view();
+				else addEventListener('load', view, { once: true });
+
+				const doc = document.documentElement;
+				const depth = () => {
+					const max = doc.scrollHeight - innerHeight;
+					return max <= 0 ? 100 : Math.min(100, Math.round((scrollY / max) * 100));
+				};
+				let maxScroll = depth();
+				let visibleMs = 0;
+				let since = performance.now();
+				let reported = false;
+				// Once per stretch of visibility: hiding the tab and leaving the page both end up here.
+				const report = () => {
+					if (reported) return;
+					reported = true;
+					visibleMs += performance.now() - since;
+					if (visibleMs > 1000) beacon({ event: 'time_on_page', value: Math.round(visibleMs) });
+					beacon({ event: 'scroll_depth', value: maxScroll });
+					visibleMs = 0;
+				};
+				addEventListener('scroll', () => (maxScroll = Math.max(maxScroll, depth())), { passive: true });
+				addEventListener('pagehide', report);
+				document.addEventListener('visibilitychange', () => {
+					if (document.visibilityState === 'hidden') return report();
+					reported = false;
+					since = performance.now();
+				});
+				addEventListener('click', (e) => {
+					const a = e.target.closest?.('a[href]');
+					if (a && a.host && a.host !== location.host) beacon({ event: 'outbound_click', path: a.href.slice(0, 500) });
+				});
+			})();
+		</script>
+	)
+}

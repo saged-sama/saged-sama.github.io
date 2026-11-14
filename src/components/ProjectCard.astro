@@ -1,6 +1,6 @@
 ---
 /**
- * A project as a card: the cover on a glowing stage, then title, summary and categories; the whole
+ * A project as a card: the cover as a product shot, then title, summary and categories; the whole
  * card links to the project. `feature` lays it out wide (text beside the cover) for the lead project.
  */
 import type { CollectionEntry } from 'astro:content';
@@ -9,22 +9,23 @@ import FolderCode from '@lucide/astro/icons/folder-code';
 import Showcase from './Showcase.astro';
 import Tags from './Tags.astro';
 
-type Props = { project: CollectionEntry<'projects'>; feature?: boolean };
-const { project, feature = false } = Astro.props;
+/** `eager`: the cover is above the fold (the page's main image), so it loads first. */
+type Props = { project: CollectionEntry<'projects'>; feature?: boolean; eager?: boolean };
+const { project, feature = false, eager = false } = Astro.props;
 const { id, data } = project;
 ---
 
 <article
 	class:list={[
-		'surface group relative grid overflow-hidden transition-[border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-brand-2/50',
+		'surface group relative grid overflow-hidden transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-accent',
 		feature && 'sm:col-span-full md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]'
 	]}
 >
-	<div class:list={['stage-glow', feature && 'md:order-last md:flex md:items-center']}>
+	<div class:list={[feature && 'md:order-last md:flex md:items-center']}>
 		<div class="w-full">
 		{
 			data.cover ? (
-				<Showcase src={data.cover} alt={data.coverAlt ?? data.title} size={feature ? 'hero' : 'card'} />
+				<Showcase src={data.cover} alt={data.coverAlt ?? data.title} size={feature ? 'hero' : 'card'} eager={eager} />
 			) : (
 				<div class="grid aspect-16/10 place-items-center text-muted-foreground">
 					<FolderCode class="size-10" />

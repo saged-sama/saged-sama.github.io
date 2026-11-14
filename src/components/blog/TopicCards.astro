@@ -13,7 +13,7 @@ const { topics } = Astro.props;
 		<ul class="grid gap-3 sm:grid-cols-2">
 			{topics.map((topic) => (
 				<li>
-					<a href={`/blog/${topic.path}/`} class="surface group flex h-full gap-3 p-4 transition-colors hover:border-brand-2/50">
+					<a href={`/blog/${topic.path}/`} class="surface group flex h-full gap-3 p-4 transition-colors hover:bg-accent">
 						<Folder class="mt-0.5 size-5 shrink-0 text-highlight" />
 						<span class="grid min-w-0 gap-1">
 							<span class="font-medium group-hover:text-highlight">{topic.label}</span>

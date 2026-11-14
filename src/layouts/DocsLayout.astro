@@ -9,8 +9,9 @@ import PageLayout from './PageLayout.astro';
 import BlogSidebar from '@/components/blog/BlogSidebar.astro';
 import type { SeoProps } from '@/components/Seo.astro';
 import type { Topic } from '@/lib/blog-tree';
+import type { TrackTarget } from '@/lib/telemetry';
 
-type Props = SeoProps & { tree: Topic; current: string };
+type Props = SeoProps & { tree: Topic; current: string; track?: TrackTarget };
 const { tree, current, ...seo } = Astro.props;
 const hasAside = Astro.slots.has('aside');
 ---
@@ -18,7 +19,7 @@ const hasAside = Astro.slots.has('aside');
 <PageLayout {...seo} wide>
 	<div class:list={['grid gap-10 pt-8 lg:grid-cols-[15rem_minmax(0,1fr)]', hasAside && 'xl:grid-cols-[15rem_minmax(0,1fr)_13rem]']}>
 		<aside class="lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6rem)] lg:self-start lg:overflow-y-auto lg:pr-2">
-			<details class="surface group/browse p-3 lg:hidden">
+			<details class="surface p-3 lg:hidden">
 				<summary class="flex cursor-pointer list-none items-center gap-2 font-medium [&::-webkit-details-marker]:hidden">
 					<ListTree class="size-4 text-highlight" />Browse topics
 				</summary>

@@ -1,8 +1,8 @@
 {
   "files": {
     "blogs/brief-introduction-to-bangladeshi-snakes.md": {
-      "version": "252d3cace260a43873598b449a24e03f6b536378e00ec39d1a1641bb4130bfb7",
-      "sha": "252d3cace260a43873598b449a24e03f6b536378e00ec39d1a1641bb4130bfb7"
+      "version": "9ec5754a7012b65db6129f8924dce33cb1777eb71e62df491cd446e83fdfc4e7",
+      "sha": "9ec5754a7012b65db6129f8924dce33cb1777eb71e62df491cd446e83fdfc4e7"
     },
     "data/achievements/champion-at-the-national-round-in-the-secondary-category-at-the-bangladesh-mathe.json": {
       "version": "d1e56e0292dbe35e502cd1995b59bd2e002be6e5ccecf8ba523622c6eeb80da4",
@@ -41,20 +41,20 @@
       "sha": "ef12ad9a5df7f288226b9223d4401c9d3c3047b4b600e14148393ad163ae651c"
     },
     "data/profile.json": {
-      "version": "4c2d929b3fa4c263b0c553d1b9f3e153ef0651b0160aa0dd342e4799b82fd29d",
-      "sha": "4c2d929b3fa4c263b0c553d1b9f3e153ef0651b0160aa0dd342e4799b82fd29d"
+      "version": "208ca57c4d79d123469ee756abd1598cef2dc45f979d28d9d096c889fe67e4b5",
+      "sha": "208ca57c4d79d123469ee756abd1598cef2dc45f979d28d9d096c889fe67e4b5"
     },
     "data/projects/english360.md": {
-      "version": "8e1c3d72f7f29556de789c00985ff34c78095aab9369c0258d7f153fc6c30195",
-      "sha": "8e1c3d72f7f29556de789c00985ff34c78095aab9369c0258d7f153fc6c30195"
+      "version": "17a557253d608ff8de9bc55995b649defe74db6540c5ae743f6f95d72922fa60",
+      "sha": "17a557253d608ff8de9bc55995b649defe74db6540c5ae743f6f95d72922fa60"
     },
     "data/projects/lessonq.md": {
-      "version": "b2d01295682254a6d44c06d92b9ddc06208552c79ab8e5fd82a5c7b8402d87cf",
-      "sha": "b2d01295682254a6d44c06d92b9ddc06208552c79ab8e5fd82a5c7b8402d87cf"
+      "version": "c600f07983c8d925c3334d050069e3ad9479f38bc64165a3766dfa5d06e5dd11",
+      "sha": "c600f07983c8d925c3334d050069e3ad9479f38bc64165a3766dfa5d06e5dd11"
     },
     "data/projects/wemate-crm.md": {
-      "version": "c95e8da5c49554ec5c1877586a208afb37cb08c653d3636ba6df7a71c2396790",
-      "sha": "c95e8da5c49554ec5c1877586a208afb37cb08c653d3636ba6df7a71c2396790"
+      "version": "7fd4129305bb24b178b46a1061386572c9cffedb68bce7d64ba464722a2d2cb0",
+      "sha": "7fd4129305bb24b178b46a1061386572c9cffedb68bce7d64ba464722a2d2cb0"
     },
     "data/skills/c-c.json": {
       "version": "dd7a5edb886dad3f37fd2413fe823fd7426cd287f1fa2dee7c97ec25a7f0d23f",

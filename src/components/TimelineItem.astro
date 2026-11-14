@@ -13,11 +13,11 @@ const { entry } = Astro.props;
 ---
 
 <li class="group/item relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 pb-10 last:pb-0">
-	<!-- The rail between markers: brand-tinted, fading toward the next entry. -->
+	<!-- The rail between markers. -->
 	<span
-		class="absolute top-12 bottom-2 left-5 w-px -translate-x-1/2 bg-linear-to-b from-brand-2/60 to-border group-last/item:hidden"
+		class="absolute top-12 bottom-2 left-5 w-px -translate-x-1/2 bg-muted-foreground/30 group-last/item:hidden"
 		aria-hidden="true"></span>
-	<div class="grid size-10 place-items-center overflow-hidden rounded-xl border bg-card text-highlight shadow-sm">
+	<div class="grid size-10 place-items-center overflow-hidden bg-muted text-highlight">
 		{
 			entry.logo ? (
 				<Img src={entry.logo} alt="" width={40} height={40} densities={[1, 2]} class="size-full object-cover" />
@@ -62,7 +62,7 @@ const { entry } = Astro.props;
 				</ul>
 			)
 		}
-		<Tags items={entry.tags} variant="outline" class="mt-3" />
+		<Tags items={entry.tags} variant="secondary" class="mt-3" />
 		{
 			entry.url && (
 				<a href={entry.url} rel="noopener" target="_blank" class="mt-2 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">

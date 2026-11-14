@@ -10,6 +10,7 @@ import SkillGroups from '@/components/SkillGroups.astro';
 import TestimonialCard from '@/components/TestimonialCard.astro';
 import { list, posts, profile, projects } from '@/lib/content';
 import { fromExperience } from '@/lib/timeline';
+import { trackItem } from '@/lib/telemetry';
 
 /*
  * The home page is a welcome, not a CV: who I am, what I've made, what I write, and a glance at
@@ -49,6 +50,7 @@ const person = {
 	image={me.seo.image ?? me.avatar}
 	type="profile"
 	jsonLd={person}
+	track={trackItem('profiles', me.adminId)}
 >
 	<Hero />
 
@@ -61,7 +63,7 @@ const person = {
 				href={allProjects.length > HOME_PROJECTS ? '/projects/' : undefined}
 				hrefLabel="All projects"
 			>
-				<ProjectGrid projects={allProjects.slice(0, HOME_PROJECTS)} />
+				<ProjectGrid projects={allProjects.slice(0, HOME_PROJECTS)} eagerLead />
 			</Section>
 		)
 	}

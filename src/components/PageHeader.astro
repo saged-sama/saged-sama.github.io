@@ -4,7 +4,7 @@ type Props = { eyebrow: string; title: string; description?: string };
 const { eyebrow, title, description } = Astro.props;
 ---
 
-<header class="hero-glow grid gap-3 pt-8 pb-10 sm:pt-14">
+<header class="grid gap-3 pt-8 pb-10 sm:pt-14">
 	<p class="eyebrow">{eyebrow}</p>
 	<h1>{title}</h1>
 	{description && <p class="max-w-2xl text-lg text-pretty text-muted-foreground">{description}</p>}

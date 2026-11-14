@@ -4,6 +4,8 @@ import { html, listing, seo, type ImageFn } from './common';
 /** `data/profile.json`: who the site is about. */
 export const profileSchema = ({ image }: { image: ImageFn }) =>
 	z.object({
+		/** The profile's id in portfolio-admin (set by the sync), for visit tracking. */
+		adminId: z.string().optional(),
 		name: z.string(),
 		headline: z.string().optional(),
 		pronouns: z.string().optional(),

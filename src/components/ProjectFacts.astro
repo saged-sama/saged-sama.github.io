@@ -38,7 +38,7 @@ const links = [
 	links.length > 0 && (
 		<div class="flex flex-wrap gap-2">
 			{links.map((l) => (
-				<a href={l.url} rel="noopener" target="_blank" class={buttonVariants({ size: 'sm', variant: l.primary ? 'default' : 'outline' })}>
+				<a href={l.url} rel="noopener" target="_blank" class={buttonVariants({ size: 'sm', variant: l.primary ? 'default' : 'secondary' })}>
 					{l.label === 'Source' ? <Github /> : <ExternalLink />}
 					{l.label}
 				</a>

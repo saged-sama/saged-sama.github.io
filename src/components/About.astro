@@ -18,7 +18,7 @@ const facts = [
 	<aside class="surface grid content-start gap-5 p-5 md:sticky md:top-24 md:self-start">
 		{
 			me.avatar && (
-				<Img src={me.avatar} alt={me.avatarAlt ?? me.name} widths={[256, 512]} sizes="16rem" class="aspect-square w-full rounded-xl object-cover" />
+				<Img src={me.avatar} alt={me.avatarAlt ?? me.name} widths={[256, 512]} sizes="16rem" class="aspect-square w-full object-cover" />
 			)
 		}
 		<dl class="grid gap-4 text-sm">
@@ -34,7 +34,7 @@ const facts = [
 				me.languages.length > 0 && (
 					<div>
 						<dt class="mb-2 text-muted-foreground">Languages</dt>
-						<dd><Tags items={me.languages.map((l) => `${l.name}${level(l.level)}`)} variant="outline" /></dd>
+						<dd><Tags items={me.languages.map((l) => `${l.name}${level(l.level)}`)} variant="secondary" /></dd>
 					</div>
 				)
 			}
@@ -42,7 +42,7 @@ const facts = [
 				me.hobbies.length > 0 && (
 					<div>
 						<dt class="mb-2 text-muted-foreground">Away from the keyboard</dt>
-						<dd><Tags items={me.hobbies} variant="outline" /></dd>
+						<dd><Tags items={me.hobbies} variant="secondary" /></dd>
 					</div>
 				)
 			}

@@ -1,4 +1,5 @@
 ---
+adminId: 7o28tqm7h60iqwm
 title: English360
 summary: LMS for One of the Best Bangladeshi English Learning Platforms by Rudra. Features one of the most sophisticated and cheapest online exercise arenas for students available in Bangladesh.
 cover: ../../images/mri21e8vi0ea144.webp

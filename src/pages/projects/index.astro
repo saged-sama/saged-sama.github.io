@@ -10,5 +10,5 @@ const description = 'Products, experiments and things I’ve helped build.';
 
 <PageLayout title={`Work · ${me.name}`} description={description}>
 	<PageHeader eyebrow="Work" title="Things I’ve built" description={description} />
-	{all.length ? <ProjectGrid projects={all} /> : <p class="text-muted-foreground">No projects yet.</p>}
+	{all.length ? <ProjectGrid projects={all} eagerLead /> : <p class="text-muted-foreground">No projects yet.</p>}
 </PageLayout>

@@ -1,6 +1,5 @@
-/* Fonts are self-hosted: a third-party font stylesheet would block the first paint on phones.
-   Inter lives in public/fonts (Latin subset); JetBrains Mono comes from Fontsource. */
-@import "@fontsource-variable/jetbrains-mono/wght.css";
+/* Fonts are self-hosted in public/fonts, trimmed to what the site uses (Western European Latin,
+   weights 400–800, the OpenType features in use) so they're small enough to load fast on phones. */
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
@@ -19,7 +18,15 @@
 @font-face {
     font-family: 'Inter';
     src: url('/fonts/InterVariable.woff2') format('woff2');
-    font-weight: 100 900;
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono.woff2') format('woff2');
+    font-weight: 400 700;
     font-style: normal;
     font-display: swap;
 }

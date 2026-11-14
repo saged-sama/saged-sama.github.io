@@ -11,7 +11,7 @@ const { name, headline, location, resume } = await profile();
 const line = [headline, location].filter(Boolean).join(' · ');
 ---
 
-<footer class="mt-16 border-t">
+<footer class="mt-16 bg-muted">
 	<div class={`mx-auto grid ${width} gap-8 px-4 py-12 sm:grid-cols-[1fr_auto] sm:px-6`}>
 		<div class="grid content-start gap-3">
 			<Logo name={name} />

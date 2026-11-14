@@ -14,6 +14,8 @@ export const profile: Kind = {
 		const languages = Array.isArray(r.languages) ? (r.languages as { name?: string; level?: string }[]) : [];
 		return {
 			data: {
+				// The admin's record id, so the site's visits count toward this profile in the admin.
+				adminId: r.id,
 				name: str(r.display_name) ?? [str(r.given_name), str(r.surname)].filter(Boolean).join(' '),
 				headline: str(r.headline),
 				pronouns: str(r.pronouns),

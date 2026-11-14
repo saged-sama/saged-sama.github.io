@@ -28,7 +28,7 @@ const links = (await list('social')).map(({ data }) => ({
 						rel="me noopener"
 						target="_blank"
 						title={labels ? undefined : link.name}
-						class={buttonVariants({ variant: labels ? 'outline' : 'ghost', size: labels ? 'sm' : 'icon' })}
+						class={buttonVariants({ variant: labels ? 'secondary' : 'ghost', size: labels ? 'sm' : 'icon' })}
 					>
 						<Icon name={link.icon ?? PLATFORM_ICONS[link.platform]} fallback="lucide:link" class="size-4" />
 						<span class={labels ? '' : 'sr-only'}>{link.name}</span>

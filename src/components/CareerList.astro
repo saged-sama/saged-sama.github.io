@@ -8,11 +8,11 @@ type Props = { entries: TimelineEntry[] };
 const { entries } = Astro.props;
 ---
 
-<ul class="surface divide-y overflow-hidden p-0">
+<ul class="grid gap-1">
 	{
 		entries.map((entry) => (
-			<li class="flex items-start gap-4 sm:items-center px-5 py-4 transition-colors hover:bg-muted/40">
-				<div class="grid size-10 shrink-0 place-items-center overflow-hidden rounded-xl border bg-background text-muted-foreground">
+			<li class="surface flex items-start gap-4 px-5 py-4 sm:items-center">
+				<div class="grid size-10 shrink-0 place-items-center overflow-hidden bg-background text-highlight">
 					{entry.logo ? (
 						<Img src={entry.logo} alt="" width={40} height={40} densities={[1, 2]} class="size-full object-cover" />
 					) : (

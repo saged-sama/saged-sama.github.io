@@ -20,11 +20,11 @@ const path = Astro.url.pathname;
 					<a
 						href={link.href}
 						aria-current={isCurrent(link.href, path) ? 'page' : undefined}
-						class="relative rounded-full px-2 py-1.5 whitespace-nowrap text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground sm:px-3"
+						class="relative px-2 py-1.5 whitespace-nowrap text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground sm:px-3"
 					>
 						{link.label}
 						{isCurrent(link.href, path) && (
-							<span class="absolute inset-x-2 -bottom-0.5 h-px bg-(image:--brand-gradient) sm:inset-x-3" aria-hidden="true" />
+							<span class="absolute inset-x-2 -bottom-0.5 h-0.5 bg-highlight sm:inset-x-3" aria-hidden="true" />
 						)}
 					</a>
 				))

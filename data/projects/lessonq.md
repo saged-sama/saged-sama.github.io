@@ -1,4 +1,5 @@
 ---
+adminId: st4fao5gjzuh39k
 title: LessonQ
 summary: LessonQ is an LMS SaaS platform brought by our own startup Wemate. The SaaS platform aims to ease the educators' endeavor to build their own website to build an online presence of their educational organization
 cover: ../../images/cb9jhwu6uv7p476.webp

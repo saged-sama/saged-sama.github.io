@@ -8,6 +8,8 @@ import { day, many, names, one, organization, positive, str, type Ctx } from './
 function article(r: PbRecord, ctx: Ctx, file: string) {
 	const cover = one(r, 'cover_image');
 	return {
+		// The admin's record id, so visits to the page count toward this item in the admin.
+		adminId: r.id,
 		title: str(r.title),
 		summary: str(r.summary),
 		cover: ctx.media.image(cover, file),

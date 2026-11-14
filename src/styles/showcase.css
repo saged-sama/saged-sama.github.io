@@ -31,7 +31,6 @@
 	height: auto;
 	max-width: 58cqw;
 	max-height: 56cqh;
-	border-radius: 0.5rem;
 	/* drop-shadow follows the image's own outline: a transparent PNG/SVG casts the shape of its
 	   object, not a rectangle around it (box-shadow would read as a border and background). */
 	filter: drop-shadow(0 1px 1px var(--object-shadow)) drop-shadow(0 14px 18px var(--object-shadow));

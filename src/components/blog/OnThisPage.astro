@@ -10,12 +10,12 @@ const { headings } = Astro.props;
 	headings.length > 1 && (
 		<nav aria-label="On this page" class="grid gap-2 text-sm">
 			<p class="eyebrow">On this page</p>
-			<ul class="grid gap-1.5 border-l">
+			<ul class="grid gap-1.5">
 				{headings.map((h) => (
 					<li>
 						<a
 							href={`#${h.slug}`}
-							class:list={['-ml-px block border-l border-transparent text-muted-foreground hover:border-brand-2 hover:text-foreground', h.depth === 3 ? 'pl-6' : 'pl-3']}
+							class:list={['block text-muted-foreground hover:text-highlight', h.depth === 3 ? 'pl-3' : '']}
 						>
 							{h.text}
 						</a>

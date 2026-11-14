@@ -1,12 +1,12 @@
 /*
  * Design tokens, taken from the brand mark (public/sajid.svg): deep ink #1C1B2B, a violet gradient
- * #C4A7FF → #9270FF → #5D3BCE, and lavender-tinted neutrals. Light theme on :root, dark on .dark.
+ * #C4A7FF → #9270FF → #5D3BCE (used as flat colors), and lavender-tinted neutrals. Light theme on :root, dark on .dark.
  * Components use these tokens only, never raw colors.
  */
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     --color-highlight: var(--highlight);
     --color-live: var(--live);
     --color-brand-1: var(--brand-1);
@@ -44,14 +44,10 @@
     --brand-1: #c4a7ff;
     --brand-2: #9270ff;
     --brand-3: #5d3bce;
-    /* Gradient for text and accents: darker stops in light mode so text stays readable. */
-    --brand-gradient: linear-gradient(120deg, #9270ff, #5d3bce 55%, #3f2a99);
     /* Accent text (links, active states): readable on the page background. */
     --highlight: #5d3bce;
     /* "Available" status dot. */
     --live: #10b981;
-    /* Soft glow behind the hero and covers. */
-    --glow: color-mix(in oklab, #9270ff 22%, transparent);
     --object-shadow: rgb(28 27 43 / 0.2);
 
     --background: #fcfbff;
@@ -72,14 +68,13 @@
     --border: #e8e4f3;
     --input: #dcd6ee;
     --ring: #9270ff;
-    --radius: 0.75rem;
+    /* Square corners everywhere (shadcn components included). */
+    --radius: 0;
 }
 
 .dark {
-    --brand-gradient: linear-gradient(120deg, #d8c7ff, #c4a7ff 30%, #9270ff 70%, #7a58f0);
     --highlight: #c4a7ff;
     --live: #34d399;
-    --glow: color-mix(in oklab, #9270ff 26%, transparent);
     --object-shadow: rgb(0 0 0 / 0.55);
 
     --background: #12111b;

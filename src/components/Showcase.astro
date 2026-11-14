@@ -8,7 +8,10 @@ import Img from '@/components/Img.astro';
 type Props = { src: ImageMetadata; alt: string; size?: 'card' | 'hero'; eager?: boolean };
 const { src, alt, size = 'card', eager = false } = Astro.props;
 
-const sizes = size === 'hero' ? '(width < 640px) 70vw, 28rem' : '(width < 640px) 55vw, 14rem';
+// The tilted image is drawn at about half its stage's width (showcase.css), so these match what's
+// actually on screen; the widths give phones a close fit.
+const sizes = size === 'hero' ? '(width < 640px) 45vw, 22rem' : '(width < 640px) 55vw, 17rem';
+const widths = [240, 360, 480, 720];
 const loading = eager ? 'eager' : 'lazy';
 // An eager cover is the page's main image: fetch it first.
 const priority = eager ? 'high' : 'auto';
@@ -16,10 +19,10 @@ const priority = eager ? 'high' : 'auto';
 
 <div class="showcase" data-size={size}>
 	<div class="showcase-object">
-		<Img src={src} alt={alt} widths={[400, 800]} sizes={sizes} loading={loading} fetchpriority={priority} class="showcase-image" />
+		<Img src={src} alt={alt} widths={widths} sizes={sizes} loading={loading} fetchpriority={priority} class="showcase-image" />
 		<!-- Mirror copy for the reflection; decorative. -->
 		<div class="showcase-reflection" aria-hidden="true">
-			<Img src={src} alt="" widths={[400, 800]} sizes={sizes} loading={loading} class="showcase-image" />
+			<Img src={src} alt="" widths={widths} sizes={sizes} loading={loading} class="showcase-image" />
 		</div>
 	</div>
 </div>

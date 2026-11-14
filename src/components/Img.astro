@@ -8,7 +8,9 @@ import type { ComponentProps } from 'astro/types';
 
 type Props = ComponentProps<typeof Image>;
 const props = Astro.props;
+// Slightly stronger compression than the default: no visible difference, noticeably smaller files.
+const QUALITY = 72;
 const isSvg = typeof props.src === 'object' && 'format' in props.src && props.src.format === 'svg';
 ---
 
-{isSvg ? <Image {...props} format="svg" widths={undefined} densities={undefined} /> : <Image {...props} />}
+{isSvg ? <Image {...props} format="svg" widths={undefined} densities={undefined} /> : <Image quality={QUALITY} {...props} />}

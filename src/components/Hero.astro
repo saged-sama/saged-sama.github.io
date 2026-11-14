@@ -13,20 +13,20 @@ const me = await profile();
 const firstName = me.name.split(' ')[0];
 ---
 
-<section aria-label="Introduction" class="hero-glow grid items-center gap-10 pt-10 pb-16 sm:pt-20 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
+<section aria-label="Introduction" class="grid items-center gap-10 pt-10 pb-16 sm:pt-20 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
 	<div class="grid gap-6">
 		<div class="flex flex-wrap items-center gap-2 text-sm">
 			{
 				me.openToWork && (
-					<span class="inline-flex items-center gap-2 rounded-full border bg-card/60 px-3 py-1 font-medium">
-						<span class="size-2 rounded-full bg-live shadow-[0_0_0_3px] shadow-live/20" aria-hidden="true" />
+					<span class="inline-flex items-center gap-2 bg-muted px-3 py-1 font-medium">
+						<span class="size-2 bg-live" aria-hidden="true" />
 						{me.availability ?? 'Open to new work'}
 					</span>
 				)
 			}
 			{
 				me.location && (
-					<span class="inline-flex items-center gap-1.5 rounded-full border bg-card/60 px-3 py-1 text-muted-foreground">
+					<span class="inline-flex items-center gap-1.5 bg-muted px-3 py-1 text-muted-foreground">
 						<MapPin class="size-3.5" />
 						{me.location}
 					</span>
@@ -35,20 +35,20 @@ const firstName = me.name.split(' ')[0];
 		</div>
 
 		<h1 class="text-5xl leading-[1.05] font-semibold tracking-tighter sm:text-6xl lg:text-7xl">
-			Hi, I’m <span class="text-gradient">{firstName}</span>.
+			Hi, I’m <span class="text-highlight">{firstName}</span>.
 			{me.shortBio && <span class="block text-muted-foreground">{me.shortBio}</span>}
 		</h1>
 
 		{me.headline && <p class="max-w-xl text-lg text-pretty text-muted-foreground">{me.headline}</p>}
 
 		<div class="flex flex-wrap items-center gap-3">
-			<a href="#work" class={cn(buttonVariants({ size: 'lg' }), 'rounded-full px-5')}>
+			<a href="#work" class={cn(buttonVariants({ size: 'lg' }), 'px-5')}>
 				See my work
 				<ArrowDown />
 			</a>
 			{
 				me.resume && (
-					<a href={me.resume} class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 'rounded-full px-5')}>
+					<a href={me.resume} class={cn(buttonVariants({ size: 'lg', variant: 'secondary' }), 'px-5')}>
 						<Rocket />
 						Résumé
 					</a>

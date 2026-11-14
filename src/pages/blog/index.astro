@@ -12,7 +12,7 @@ const LATEST = 5;
 ---
 
 <DocsLayout title={`Blog · ${me.name}`} description={description} tree={tree} current="">
-	<header class="hero-glow grid gap-3 pb-8">
+	<header class="grid gap-3 pb-8">
 		<p class="eyebrow">Blog</p>
 		<h1>Notes & essays</h1>
 		<p class="max-w-2xl text-lg text-pretty text-muted-foreground">{description}</p>
@@ -29,6 +29,6 @@ const LATEST = 5;
 
 	<section aria-labelledby="latest-title">
 		<h2 id="latest-title" class="mb-2 text-xl">Latest</h2>
-		{all.length ? <PostList posts={all.slice(0, LATEST)} /> : <p class="text-muted-foreground">No posts yet.</p>}
+		{all.length ? <PostList posts={all.slice(0, LATEST)} eagerFirst={!tree.topics.length} /> : <p class="text-muted-foreground">No posts yet.</p>}
 	</section>
 </DocsLayout>

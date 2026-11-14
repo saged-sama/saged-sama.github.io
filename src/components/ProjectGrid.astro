@@ -3,10 +3,11 @@
 import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 
-type Props = { projects: CollectionEntry<'projects'>[] };
-const { projects } = Astro.props;
+/** `eagerLead`: the lead project is the first big image on the page (true on the home page). */
+type Props = { projects: CollectionEntry<'projects'>[]; eagerLead?: boolean };
+const { projects, eagerLead = false } = Astro.props;
 ---
 
 <div class="grid gap-5 sm:grid-cols-2">
-	{projects.map((project, i) => <ProjectCard project={project} feature={i === 0} />)}
+	{projects.map((project, i) => <ProjectCard project={project} feature={i === 0} eager={eagerLead && i === 0} />)}
 </div>

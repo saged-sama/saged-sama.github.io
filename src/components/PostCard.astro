@@ -8,8 +8,8 @@ import Img from '@/components/Img.astro';
 import { formatDate, isoDay } from '@/lib/dates';
 import { readingTime } from '@/lib/reading-time';
 
-type Props = { post: CollectionEntry<'blog'> };
-const { post } = Astro.props;
+type Props = { post: CollectionEntry<'blog'>; eager?: boolean };
+const { post, eager = false } = Astro.props;
 const { id, data } = post;
 ---
 
@@ -29,9 +29,12 @@ const { id, data } = post;
 			<Img
 				src={data.cover}
 				alt=""
-				widths={[200, 400]}
-				sizes="10rem"
-				class="aspect-4/3 w-40 rounded-xl border object-cover transition-transform duration-300 group-hover:scale-[1.02] max-sm:row-start-1 max-sm:w-full max-sm:aspect-video"
+				widths={[200, 400, 640]}
+				sizes="(width < 640px) 100vw, 10rem"
+				loading={eager ? 'eager' : 'lazy'}
+				fetchpriority={eager ? 'high' : 'auto'}
+				quality={60}
+				class="aspect-4/3 w-40 object-cover transition-transform duration-300 group-hover:scale-[1.02] max-sm:row-start-1 max-sm:w-full max-sm:aspect-video"
 			/>
 		)
 	}

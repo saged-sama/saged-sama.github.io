@@ -8,14 +8,20 @@ import ArrowLeft from '@lucide/astro/icons/arrow-left';
 import PageLayout from './PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import type { SeoProps } from '@/components/Seo.astro';
+import type { TrackTarget } from '@/lib/telemetry';
 
-type Props = SeoProps & { heading: string; summary?: string; back: { href: string; label: string } };
+type Props = SeoProps & {
+	heading: string;
+	summary?: string;
+	back: { href: string; label: string };
+	track?: TrackTarget;
+};
 const { heading, summary, back, ...seo } = Astro.props;
 ---
 
 <PageLayout {...seo}>
 	<article class="mx-auto max-w-3xl">
-		<header class="hero-glow grid gap-4 pt-6 sm:pt-10">
+		<header class="grid gap-4 pt-6 sm:pt-10">
 			<a href={back.href} class="group inline-flex w-fit items-center gap-1.5 text-sm text-muted-foreground hover:text-highlight">
 				<ArrowLeft class="size-4 transition-transform group-hover:-translate-x-0.5" />
 				{back.label}

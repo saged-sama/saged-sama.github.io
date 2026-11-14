@@ -9,7 +9,7 @@ type Props = { tree: Topic; topic: Topic };
 const { tree, topic } = Astro.props;
 ---
 
-<header class="hero-glow grid gap-3 pb-8">
+<header class="grid gap-3 pb-8">
 	<Breadcrumbs trail={trail(tree, topic.path).slice(0, -1)} />
 	<h1>{topic.label}</h1>
 	{topic.description && <p class="max-w-2xl text-lg text-pretty text-muted-foreground">{topic.description}</p>}

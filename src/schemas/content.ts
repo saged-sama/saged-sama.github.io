@@ -3,6 +3,8 @@ import { date, link, listing, organization, period, seo, type ImageFn } from './
 
 /** Fields shared by Markdown entries that get their own page (blog posts and projects). */
 const article = (image: ImageFn) => ({
+	/** The item's id in portfolio-admin (set by the sync), for visit tracking. */
+	adminId: z.string().optional(),
 	title: z.string(),
 	summary: z.string().optional(),
 	cover: image().optional(),

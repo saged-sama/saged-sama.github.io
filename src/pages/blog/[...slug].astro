@@ -11,6 +11,7 @@ import TopicPage from '@/components/blog/TopicPage.astro';
 import { allTopics, blogTree, readingOrder, type Post, type Topic } from '@/lib/blog-tree';
 import { profile } from '@/lib/content';
 import { pageHeadings } from '@/lib/headings';
+import { trackItem } from '@/lib/telemetry';
 
 export async function getStaticPaths() {
 	const tree = await blogTree();
@@ -52,6 +53,7 @@ const jsonLd = post && {
 			jsonLd={jsonLd || undefined}
 			tree={tree}
 			current={post.id}
+			track={trackItem('posts', post.data.adminId)}
 		>
 			<PostView tree={tree} post={post}>
 				<rendered.Content />

@@ -169,10 +169,9 @@
 	}
 }
 
-/* Code blocks sit on the theme's muted surface in both modes. Unlayered, so it wins over the
+/* Code blocks sit on the theme's muted fill in both modes. Unlayered, so it wins over the
    typography plugin's dark block, which would clash with the light theme. */
 .rich-content pre {
 	background-color: var(--muted);
 	color: var(--foreground);
-	border: 1px solid var(--border);
 }

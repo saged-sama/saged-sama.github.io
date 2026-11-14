@@ -1,4 +1,5 @@
 ---
+adminId: rree3ascyutwl9f
 title: Wemate CRM
 summary: A CRM SaaS that we primarily built for our own use. Since then it has evolved into a full fledged CRM SaaS that we are currently aiming to start selling
 cover: ../../images/qyl8nuj0nkvuz7y.svg

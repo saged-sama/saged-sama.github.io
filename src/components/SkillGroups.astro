@@ -13,7 +13,7 @@ const groups = await skillGroups();
 				<h3 class="mb-4 text-sm font-medium text-muted-foreground">{category}</h3>
 				<ul class="flex flex-wrap gap-2">
 					{skills.map(({ data }) => (
-						<li class="inline-flex items-center gap-2 rounded-lg border bg-background px-3 py-1.5 text-sm">
+						<li class="inline-flex items-center gap-2 bg-background px-3 py-1.5 text-sm">
 							<Icon name={data.icon} class="size-4 text-highlight" />
 							{data.name}
 						</li>

@@ -12,7 +12,7 @@ const { tree, current } = Astro.props;
 	<a
 		href="/blog/"
 		aria-current={current === '' ? 'page' : undefined}
-		class="flex items-center gap-2 rounded-md px-2 py-1.5 font-medium hover:bg-muted/60 aria-[current=page]:text-highlight"
+		class="flex items-center gap-2 px-2 py-1.5 font-medium hover:bg-muted aria-[current=page]:text-highlight"
 	>
 		<BookOpen class="size-4" />
 		Overview

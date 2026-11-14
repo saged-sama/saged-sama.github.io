@@ -18,7 +18,7 @@ const index = order.findIndex((p) => p.id === post.id);
 ---
 
 <article>
-	<header class="hero-glow grid gap-4 pb-2">
+	<header class="grid gap-4 pb-2">
 		<Breadcrumbs trail={trail(tree, topicOf(post))} />
 		<h1 class="text-4xl leading-tight sm:text-5xl">{data.title}</h1>
 		{data.summary && <p class="text-lg text-pretty text-muted-foreground sm:text-xl">{data.summary}</p>}
@@ -36,7 +36,8 @@ const index = order.findIndex((p) => p.id === post.id);
 				sizes="(width < 64rem) 100vw, 48rem"
 				loading="eager"
 				fetchpriority="high"
-				class="my-8 w-full rounded-2xl border"
+				quality={62}
+				class="my-8 w-full"
 			/>
 		)
 	}

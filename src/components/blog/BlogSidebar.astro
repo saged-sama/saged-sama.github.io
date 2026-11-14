@@ -1,0 +1,21 @@
+---
+/** The blog's navigation: an overview link and the topic tree. `current` is the page's path below /blog/. */
+import BookOpen from '@lucide/astro/icons/book-open';
+import TopicTree from './TopicTree.astro';
+import type { Topic } from '@/lib/blog-tree';
+
+type Props = { tree: Topic; current: string };
+const { tree, current } = Astro.props;
+---
+
+<nav aria-label="Blog topics" class="grid gap-2 text-sm">
+	<a
+		href="/blog/"
+		aria-current={current === '' ? 'page' : undefined}
+		class="flex items-center gap-2 rounded-md px-2 py-1.5 font-medium hover:bg-muted/60 aria-[current=page]:text-highlight"
+	>
+		<BookOpen class="size-4" />
+		Overview
+	</a>
+	<TopicTree topic={tree} current={current} />
+</nav>

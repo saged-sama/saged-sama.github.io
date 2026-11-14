@@ -1,0 +1,34 @@
+---
+/** A topic's own page: breadcrumbs, name and description, its subtopics, then its posts. */
+import Breadcrumbs from './Breadcrumbs.astro';
+import TopicCards from './TopicCards.astro';
+import PostList from '@/components/PostList.astro';
+import { trail, type Topic } from '@/lib/blog-tree';
+
+type Props = { tree: Topic; topic: Topic };
+const { tree, topic } = Astro.props;
+---
+
+<header class="hero-glow grid gap-3 pb-8">
+	<Breadcrumbs trail={trail(tree, topic.path).slice(0, -1)} />
+	<h1 class="rise">{topic.label}</h1>
+	{topic.description && <p class="rise max-w-2xl text-lg text-pretty text-muted-foreground" style="--i: 1">{topic.description}</p>}
+</header>
+
+{
+	topic.topics.length > 0 && (
+		<section aria-labelledby="subtopics-title" class="pb-10">
+			<h2 id="subtopics-title" class="mb-4 text-xl">Subtopics</h2>
+			<TopicCards topics={topic.topics} />
+		</section>
+	)
+}
+
+{
+	topic.posts.length > 0 && (
+		<section aria-labelledby="posts-title">
+			<h2 id="posts-title" class="mb-2 text-xl">Posts</h2>
+			<PostList posts={topic.posts} />
+		</section>
+	)
+}

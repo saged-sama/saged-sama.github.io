@@ -1,0 +1,35 @@
+---
+/** Previous / next post in reading order, at the end of a post. */
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import type { Post } from '@/lib/blog-tree';
+
+type Props = { previous?: Post; next?: Post };
+const { previous, next } = Astro.props;
+const card = 'surface group grid gap-1 p-4 transition-colors hover:border-brand-2/50';
+---
+
+{
+	(previous || next) && (
+		<nav aria-label="More posts" class="mt-14 grid gap-3 sm:grid-cols-2">
+			{previous ? (
+				<a href={`/blog/${previous.id}/`} class={card}>
+					<span class="inline-flex items-center gap-1 text-xs text-muted-foreground">
+						<ArrowLeft class="size-3.5" />Previous
+					</span>
+					<span class="font-medium group-hover:text-highlight">{previous.data.title}</span>
+				</a>
+			) : (
+				<span />
+			)}
+			{next && (
+				<a href={`/blog/${next.id}/`} class={`${card} text-right`}>
+					<span class="inline-flex items-center justify-end gap-1 text-xs text-muted-foreground">
+						Next<ArrowRight class="size-3.5" />
+					</span>
+					<span class="font-medium group-hover:text-highlight">{next.data.title}</span>
+				</a>
+			)}
+		</nav>
+	)
+}

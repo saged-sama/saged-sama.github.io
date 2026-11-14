@@ -34,7 +34,7 @@ export async function desiredFiles(kind: Kind, api: Api, ctx: Ctx): Promise<Desi
 	if (kind.single) records = records.slice(0, 1);
 
 	const taken = new Set<string>();
-	return records.map((record) => {
+	const files: Desired[] = records.map((record) => {
 		let name = kind.name(record);
 		if (taken.has(name)) name = `${name}-${record.id}`;
 		taken.add(name);
@@ -44,4 +44,9 @@ export async function desiredFiles(kind: Kind, api: Api, ctx: Ctx): Promise<Desi
 		const content = serialize(kind, clean(data), body);
 		return { path, version: sha(content), load: async () => content };
 	});
+	for (const [path, data] of kind.extras?.(records) ?? []) {
+		const content = JSON.stringify(data, null, 2) + '\n';
+		files.push({ path, version: sha(content), load: async () => content });
+	}
+	return files;
 }

@@ -1,0 +1,22 @@
+---
+/** "Blog › Machine Learning › Linear Models": where a page sits in the blog. */
+import ChevronRight from '@lucide/astro/icons/chevron-right';
+import type { Topic } from '@/lib/blog-tree';
+
+type Props = { trail: Topic[] };
+const { trail } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb">
+	<ol class="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+		<li><a href="/blog/" class="hover:text-highlight">Blog</a></li>
+		{
+			trail.map((topic) => (
+				<li class="flex items-center gap-1">
+					<ChevronRight class="size-3.5" />
+					<a href={`/blog/${topic.path}/`} class="hover:text-highlight">{topic.label}</a>
+				</li>
+			))
+		}
+	</ol>
+</nav>

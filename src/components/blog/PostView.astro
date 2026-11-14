@@ -1,0 +1,43 @@
+---
+/** A post inside the docs layout: breadcrumbs, title, meta, cover, text, then previous/next. */
+import Breadcrumbs from './Breadcrumbs.astro';
+import PostPager from './PostPager.astro';
+import Img from '@/components/Img.astro';
+import PostMeta from '@/components/PostMeta.astro';
+import Prose from '@/components/Prose.astro';
+import Tags from '@/components/Tags.astro';
+import { readingOrder, topicOf, trail, type Post, type Topic } from '@/lib/blog-tree';
+
+type Props = { tree: Topic; post: Post };
+const { tree, post } = Astro.props;
+const { data } = post;
+
+const order = readingOrder(tree);
+const index = order.findIndex((p) => p.id === post.id);
+---
+
+<article>
+	<header class="hero-glow grid gap-4 pb-2">
+		<Breadcrumbs trail={trail(tree, topicOf(post))} />
+		<h1 class="rise text-4xl leading-tight sm:text-5xl">{data.title}</h1>
+		{data.summary && <p class="rise text-lg text-pretty text-muted-foreground sm:text-xl" style="--i: 1">{data.summary}</p>}
+		<div class="rise grid gap-3" style="--i: 2">
+			<PostMeta post={post} />
+			<Tags items={data.tags} />
+		</div>
+	</header>
+	{
+		data.cover && (
+			<Img
+				src={data.cover}
+				alt={data.coverAlt ?? ''}
+				widths={[640, 1280]}
+				sizes="(width < 64rem) 100vw, 48rem"
+				loading="eager"
+				class="my-8 w-full rounded-2xl border"
+			/>
+		)
+	}
+	<Prose class="mt-8 text-lg/8"><slot /></Prose>
+	<PostPager previous={order[index - 1]} next={order[index + 1]} />
+</article>

@@ -1,5 +1,6 @@
 import type { PbRecord } from '../api.ts';
 import { toSingleLine } from '../html.ts';
+import { topicFolder, topicMetas } from '../topics.ts';
 import type { Kind } from './kind.ts';
 import { day, many, names, one, organization, positive, str, type Ctx } from './util.ts';
 
@@ -31,7 +32,9 @@ export const posts: Kind = {
 	expand: ['cover_image', 'tags', 'og_image'],
 	folder: 'blogs',
 	format: 'md',
-	name: (r) => str(r.slug) ?? r.id,
+	// The topic path is the folder: blogs/machine-learning/linear-models/<slug>.md
+	name: (r) => [topicFolder(r), str(r.slug) ?? r.id].filter(Boolean).join('/'),
+	extras: (records) => topicMetas(records, 'blogs'),
 	build: (r, ctx, file) => ({
 		data: {
 			...article(r, ctx, file),

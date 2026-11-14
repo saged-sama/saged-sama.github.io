@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { basename, extname, resolve } from 'node:path';
+import { basename, extname, resolve, sep } from 'node:path';
 import { parse } from 'yaml';
 
 /**
@@ -8,15 +8,19 @@ import { parse } from 'yaml';
  */
 type Entry = Record<string, unknown> & { slug: string };
 
+/**
+ * Every file with this extension in `folder` and its sub-folders. `slug` is the path without the
+ * extension ("machine-learning/intro"), which is also the page's URL path.
+ */
 function read(root: string, folder: string, ext: '.json' | '.md'): Entry[] {
 	const dir = resolve(root, folder);
 	if (!existsSync(dir)) return [];
-	return readdirSync(dir)
-		.filter((f) => extname(f) === ext)
+	return readdirSync(dir, { recursive: true, encoding: 'utf8' })
+		.filter((f) => extname(f) === ext && !basename(f).startsWith('_'))
 		.map((f) => {
 			const text = readFileSync(resolve(dir, f), 'utf8');
 			const data = ext === '.json' ? JSON.parse(text) : frontmatter(text);
-			return { ...data, slug: basename(f, ext) };
+			return { ...data, slug: f.slice(0, -ext.length).split(sep).join('/').toLowerCase() };
 		});
 }
 

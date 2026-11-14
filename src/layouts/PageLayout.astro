@@ -1,12 +1,13 @@
 ---
-/** A regular page: header, content column, footer. */
+/** A regular page: header, content column, footer. `wide` widens all three (the blog's docs layout). */
 import RootLayout from './RootLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import type { SeoProps } from '@/components/Seo.astro';
 
-type Props = SeoProps & { class?: string };
-const { class: className = '', ...seo } = Astro.props;
+type Props = SeoProps & { class?: string; wide?: boolean };
+const { class: className = '', wide = false, ...seo } = Astro.props;
+const width = wide ? 'max-w-7xl' : 'max-w-5xl';
 ---
 
 <RootLayout {...seo}>
@@ -17,10 +18,10 @@ const { class: className = '', ...seo } = Astro.props;
 			class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2"
 			>Skip to content</a
 		>
-		<Header />
-		<main id="main" class={`mx-auto w-full max-w-5xl flex-1 px-4 pb-10 sm:px-6 ${className}`}>
+		<Header width={width} />
+		<main id="main" class={`mx-auto w-full flex-1 px-4 pb-10 sm:px-6 ${width} ${className}`}>
 			<slot />
 		</main>
-		<Footer />
+		<Footer width={width} />
 	</div>
 </RootLayout>

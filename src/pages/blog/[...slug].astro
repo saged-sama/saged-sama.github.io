@@ -1,0 +1,68 @@
+---
+/**
+ * Every page under /blog/: posts (/blog/<topic>/<post>/) and topic pages (/blog/<topic>/), both
+ * from the folder structure of blogs/.
+ */
+import { render } from 'astro:content';
+import DocsLayout from '@/layouts/DocsLayout.astro';
+import OnThisPage from '@/components/blog/OnThisPage.astro';
+import PostView from '@/components/blog/PostView.astro';
+import TopicPage from '@/components/blog/TopicPage.astro';
+import { allTopics, blogTree, readingOrder, type Post, type Topic } from '@/lib/blog-tree';
+import { profile } from '@/lib/content';
+import { pageHeadings } from '@/lib/headings';
+
+export async function getStaticPaths() {
+	const tree = await blogTree();
+	const posts = readingOrder(tree).map((post) => ({ params: { slug: post.id }, props: { post } }));
+	const taken = new Set(posts.map((p) => p.params.slug));
+	// A post and a topic folder with the same path: the post wins.
+	const topics = allTopics(tree)
+		.filter((topic) => !taken.has(topic.path))
+		.map((topic) => ({ params: { slug: topic.path }, props: { topic } }));
+	return [...posts, ...topics];
+}
+
+type Props = { post: Post; topic?: never } | { topic: Topic; post?: never };
+const { post, topic } = Astro.props;
+const [tree, me] = await Promise.all([blogTree(), profile()]);
+const rendered = post ? await render(post) : undefined;
+const headings = post && rendered ? pageHeadings(rendered.headings, post.body) : [];
+
+const jsonLd = post && {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: post.data.title,
+	description: post.data.summary,
+	datePublished: post.data.date.toISOString(),
+	dateModified: (post.data.updated ?? post.data.date).toISOString(),
+	author: { '@type': 'Person', name: me.name, url: Astro.site?.href }
+};
+---
+
+{
+	post && rendered ? (
+		<DocsLayout
+			title={post.data.seo.title ?? post.data.title}
+			description={post.data.seo.description ?? post.data.summary}
+			image={post.data.seo.image ?? post.data.cover}
+			type="article"
+			canonical={post.data.canonical}
+			publishedTime={post.data.date}
+			jsonLd={jsonLd || undefined}
+			tree={tree}
+			current={post.id}
+		>
+			<PostView tree={tree} post={post}>
+				<rendered.Content />
+			</PostView>
+			{headings.length > 1 && <OnThisPage slot="aside" headings={headings} />}
+		</DocsLayout>
+	) : (
+		topic && (
+			<DocsLayout title={`${topic.label} · Blog · ${me.name}`} description={topic.description} tree={tree} current={topic.path}>
+				<TopicPage tree={tree} topic={topic} />
+			</DocsLayout>
+		)
+	)
+}

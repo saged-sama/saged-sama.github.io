@@ -10,7 +10,7 @@ only JavaScript is the light/dark switch.
 | `data/profile.json` | Who I am (name, headline, bio, photo, …) |
 | `data/<kind>/*.json` | One file per item: `social`, `skills`, `experience`, `education`, `achievements`, `testimonials`, `life-events` |
 | `data/projects/*.md` | Projects: front matter + write-up. The file name is the URL slug. |
-| `blogs/*.md` | Blog posts: front matter + Markdown (math with `$…$`, highlighted code). |
+| `blogs/**/*.md` | Blog posts: front matter + Markdown (math with `$…$`, highlighted code). Folders are topics, nested as deep as you like (`blogs/machine-learning/linear-models/post.md` → `/blog/machine-learning/linear-models/post/`); the blog's sidebar follows the folders. An optional `_meta.json` in a folder sets its name, description and order: `{ "label": "Machine Learning", "order": 1 }`. |
 | `images/` | Images referenced from data/front matter by relative path (optimized at build time) |
 | `public/` | Served as is (`public/media/` holds media used inside synced rich text) |
 

@@ -26,6 +26,8 @@ const [experience, skills, testimonials, allProjects, allPosts] = await Promise.
 
 const HOME_PROJECTS = 3;
 const HOME_POSTS = 3;
+// Only posts marked featured, newest first; the blog itself has the full topic tree.
+const featuredPosts = allPosts.filter((p) => p.data.featured).slice(0, HOME_POSTS);
 // Current roles first, then the rest by the order set in the admin.
 const roles = [...experience].sort((a, b) => Number(b.data.current) - Number(a.data.current)).map(fromExperience);
 
@@ -65,9 +67,9 @@ const person = {
 	}
 
 	{
-		allPosts.length > 0 && (
-			<Section id="writing" eyebrow="Writing" title="Notes & essays" href="/blog/" hrefLabel="All posts">
-				<PostList posts={allPosts.slice(0, HOME_POSTS)} />
+		featuredPosts.length > 0 && (
+			<Section id="blog" eyebrow="Blog" title="Notes & essays" href="/blog/" hrefLabel="All posts">
+				<PostList posts={featuredPosts} />
 			</Section>
 		)
 	}

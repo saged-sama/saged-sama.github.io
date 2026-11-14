@@ -159,15 +159,20 @@
 		color: var(--rt-teal);
 	}
 
-	/* Shiki (code in hand-written Markdown): both themes are emitted, the class picks one. */
-	.astro-code,
+	/* Shiki (code in hand-written Markdown): both themes' token colors are emitted; the class
+	   picks one. Only the colors are used, the block background stays the surface above. */
 	.astro-code span {
 		color: var(--shiki-light);
-		background-color: var(--shiki-light-bg);
 	}
-	.dark .astro-code,
 	.dark .astro-code span {
 		color: var(--shiki-dark);
-		background-color: var(--shiki-dark-bg);
 	}
+}
+
+/* Code blocks sit on the theme's muted surface in both modes. Unlayered, so it wins over the
+   typography plugin's dark block, which would clash with the light theme. */
+.rich-content pre {
+	background-color: var(--muted);
+	color: var(--foreground);
+	border: 1px solid var(--border);
 }

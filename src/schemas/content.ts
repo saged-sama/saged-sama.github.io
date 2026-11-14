@@ -42,3 +42,11 @@ export const projectSchema = ({ image }: { image: ImageFn }) =>
 		role: z.string().optional(),
 		teamSize: z.number().optional()
 	});
+
+/** `blogs/<topic>/_meta.json`: how a topic folder is shown. Without it, the folder name is used. */
+export const blogTopicSchema = z.object({
+	label: z.string(),
+	description: z.string().optional(),
+	/** Lower comes first; topics without one follow, by name. */
+	order: z.number().optional()
+});

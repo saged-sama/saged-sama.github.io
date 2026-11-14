@@ -1,0 +1,54 @@
+---
+import Img from '@/components/Img.astro';
+import { render, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+import ProjectFacts from '@/components/ProjectFacts.astro';
+import Showcase from '@/components/Showcase.astro';
+import Tags from '@/components/Tags.astro';
+import { projects } from '@/lib/content';
+
+export async function getStaticPaths() {
+	return (await projects()).map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+type Props = { project: CollectionEntry<'projects'> };
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+---
+
+<ArticleLayout
+	title={data.seo.title ?? data.title}
+	description={data.seo.description ?? data.summary}
+	image={data.seo.image ?? data.cover}
+	type="article"
+	heading={data.title}
+	summary={data.summary}
+	back={{ href: '/projects/', label: 'All projects' }}
+>
+	<Fragment slot="meta">
+		<ProjectFacts project={project} />
+		<Tags items={data.categories} />
+	</Fragment>
+	{data.cover && <Showcase slot="hero" src={data.cover} alt={data.coverAlt ?? data.title} size="hero" eager />}
+	<Content />
+	<Fragment slot="after">
+		{
+			data.gallery.length > 0 && (
+				<div class="mt-10 grid gap-3 sm:grid-cols-2">
+					{data.gallery.map((image) => (
+						<Img src={image} alt="" widths={[480, 960]} sizes="(width < 640px) 100vw, 24rem" class="w-full rounded-lg" />
+					))}
+				</div>
+			)
+		}
+		{
+			data.skills.length > 0 && (
+				<div class="mt-10">
+					<h2 class="mb-3 text-base font-medium text-muted-foreground">Built with</h2>
+					<Tags items={data.skills} variant="outline" />
+				</div>
+			)
+		}
+	</Fragment>
+</ArticleLayout>

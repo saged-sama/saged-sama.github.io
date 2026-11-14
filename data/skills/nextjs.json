@@ -1,0 +1,8 @@
+{
+  "name": "NextJS",
+  "category": "Frameworks",
+  "level": "intermediate",
+  "icon": "tabler:brand-nextjs",
+  "featured": true,
+  "order": 8
+}

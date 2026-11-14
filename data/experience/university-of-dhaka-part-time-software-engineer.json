@@ -1,0 +1,22 @@
+{
+  "title": "Part-time Software Engineer",
+  "organization": {
+    "name": "University of Dhaka",
+    "url": "https://www.du.ac.bd",
+    "location": "Dhaka, Bangladesh"
+  },
+  "employmentType": "part-time",
+  "arrangement": "hybrid",
+  "location": "Dhaka, Bangladesh",
+  "start": "2025-07-15",
+  "end": "2026-01-31",
+  "highlights": [
+    "Worked on a Rust based EMS-LMS development project"
+  ],
+  "skills": [
+    "Rust",
+    "JavaScript"
+  ],
+  "featured": true,
+  "order": 3
+}

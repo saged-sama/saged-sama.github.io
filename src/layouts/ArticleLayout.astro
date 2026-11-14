@@ -1,0 +1,31 @@
+---
+/**
+ * A blog post or project page: back link, title, summary, a `meta` slot (dates, links, …), a
+ * `hero` slot (cover), the body as prose, and an `after` slot (gallery, tags).
+ */
+import 'katex/dist/katex.min.css';
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+import PageLayout from './PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import type { SeoProps } from '@/components/Seo.astro';
+
+type Props = SeoProps & { heading: string; summary?: string; back: { href: string; label: string } };
+const { heading, summary, back, ...seo } = Astro.props;
+---
+
+<PageLayout {...seo} class="max-w-3xl">
+	<article>
+		<a href={back.href} class="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+			<ArrowLeft class="size-4" />
+			{back.label}
+		</a>
+		<header class="mt-6 grid gap-3">
+			<h1>{heading}</h1>
+			{summary && <p class="text-lg text-pretty text-muted-foreground">{summary}</p>}
+			<slot name="meta" />
+		</header>
+		<div class="my-8 empty:hidden"><slot name="hero" /></div>
+		<Prose><slot /></Prose>
+		<slot name="after" />
+	</article>
+</PageLayout>

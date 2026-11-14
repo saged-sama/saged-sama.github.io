@@ -1,0 +1,8 @@
+{
+  "name": "PyTorch",
+  "category": "Libraries",
+  "level": "intermediate",
+  "icon": "simple-icons:pytorch",
+  "featured": true,
+  "order": 5
+}

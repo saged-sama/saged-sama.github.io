@@ -1,0 +1,8 @@
+{
+  "name": "JavaScript",
+  "category": "Languages",
+  "level": "intermediate",
+  "icon": "simple-icons:javascript",
+  "featured": true,
+  "order": 1
+}

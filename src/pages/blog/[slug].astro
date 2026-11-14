@@ -1,0 +1,59 @@
+---
+import Img from '@/components/Img.astro';
+import { render, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+import PostMeta from '@/components/PostMeta.astro';
+import Tags from '@/components/Tags.astro';
+import { posts, profile } from '@/lib/content';
+
+export async function getStaticPaths() {
+	return (await posts()).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { data } = post;
+const [{ Content }, me] = await Promise.all([render(post), profile()]);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: data.title,
+	description: data.summary,
+	datePublished: data.date.toISOString(),
+	dateModified: (data.updated ?? data.date).toISOString(),
+	author: { '@type': 'Person', name: me.name, url: Astro.site?.href }
+};
+---
+
+<ArticleLayout
+	title={data.seo.title ?? data.title}
+	description={data.seo.description ?? data.summary}
+	image={data.seo.image ?? data.cover}
+	type="article"
+	canonical={data.canonical}
+	publishedTime={data.date}
+	jsonLd={jsonLd}
+	heading={data.title}
+	summary={data.summary}
+	back={{ href: '/blog/', label: 'All posts' }}
+>
+	<Fragment slot="meta">
+		<PostMeta post={post} />
+		<Tags items={data.tags} />
+	</Fragment>
+	{
+		data.cover && (
+			<Img
+				slot="hero"
+				src={data.cover}
+				alt={data.coverAlt ?? ''}
+				widths={[640, 1280]}
+				sizes="(width < 48rem) 100vw, 48rem"
+				loading="eager"
+				class="w-full rounded-xl"
+			/>
+		)
+	}
+	<Content />
+</ArticleLayout>

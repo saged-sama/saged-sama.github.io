@@ -1,0 +1,8 @@
+{
+  "name": "C/C++",
+  "category": "Languages",
+  "level": "expert",
+  "icon": "tabler:brand-cpp",
+  "featured": true,
+  "order": 6
+}

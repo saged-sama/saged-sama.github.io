@@ -1,12 +1,112 @@
 ---
-import RootLayout from "../layouts/RootLayout.astro";
-import * as testpost from "../blog/testpost.md";
+import { getImage } from 'astro:assets';
+import PageLayout from '@/layouts/PageLayout.astro';
+import About from '@/components/About.astro';
+import Intro from '@/components/Intro.astro';
+import PostCard from '@/components/PostCard.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import Section from '@/components/Section.astro';
+import SkillGroups from '@/components/SkillGroups.astro';
+import SocialLinks from '@/components/SocialLinks.astro';
+import TestimonialCard from '@/components/TestimonialCard.astro';
+import Timeline from '@/components/Timeline.astro';
+import { list, posts, profile, projects } from '@/lib/content';
+import { fromAchievement, fromEducation, fromExperience, fromLifeEvent } from '@/lib/timeline';
+
+const me = await profile();
+const [experience, education, achievements, lifeEvents, skills, testimonials, allProjects, allPosts] =
+	await Promise.all([
+		list('experience'),
+		list('education'),
+		list('achievements'),
+		list('lifeEvents'),
+		list('skills'),
+		list('testimonials'),
+		projects(),
+		posts()
+	]);
+
+const HOME_PROJECTS = 4;
+const HOME_POSTS = 3;
+
+const description = me.seo.description ?? me.shortBio ?? me.headline;
+const photo = me.avatar ? await getImage({ src: me.avatar, width: 400 }) : undefined;
+const person = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: me.name,
+	url: Astro.site?.href,
+	jobTitle: me.headline,
+	image: photo ? new URL(photo.src, Astro.site).href : undefined,
+	address: me.location
+};
 ---
 
-<RootLayout>
-	<h1>Astro</h1>
-	<h2>Getting Started</h2>
-	<h3>Welcome to Astro!</h3>
-	<testpost.default />
+<PageLayout
+	title={me.seo.title ?? (me.headline ? `${me.name} · ${me.headline}` : me.name)}
+	description={description}
+	image={me.seo.image ?? me.avatar}
+	type="profile"
+	jsonLd={person}
+>
+	<Intro />
 
-</RootLayout>
+	{me.bio && <Section id="about" title="About"><About /></Section>}
+
+	{
+		allProjects.length > 0 && (
+			<Section id="projects" title="Projects" href={allProjects.length > HOME_PROJECTS ? '/projects/' : undefined}>
+				<div class="grid gap-x-8 gap-y-12 sm:grid-cols-2">
+					{allProjects.slice(0, HOME_PROJECTS).map((project) => <ProjectCard project={project} />)}
+				</div>
+			</Section>
+		)
+	}
+
+	{experience.length > 0 && <Section id="experience" title="Experience"><Timeline entries={experience.map(fromExperience)} /></Section>}
+
+	{skills.length > 0 && <Section id="skills" title="Skills"><SkillGroups /></Section>}
+
+	{education.length > 0 && <Section id="education" title="Education"><Timeline entries={education.map(fromEducation)} /></Section>}
+
+	{
+		achievements.length > 0 && (
+			<Section id="achievements" title="Achievements">
+				<Timeline entries={achievements.map(fromAchievement)} />
+			</Section>
+		)
+	}
+
+	{
+		allPosts.length > 0 && (
+			<Section id="blog" title="Latest posts" href="/blog/" hrefLabel="All posts">
+				<div class="-mx-3 grid gap-2">
+					{allPosts.slice(0, HOME_POSTS).map((post) => <PostCard post={post} />)}
+				</div>
+			</Section>
+		)
+	}
+
+	{lifeEvents.length > 0 && <Section id="journey" title="Journey"><Timeline entries={lifeEvents.map(fromLifeEvent)} /></Section>}
+
+	{
+		testimonials.length > 0 && (
+			<Section id="testimonials" title="Kind words">
+				<div class="grid gap-4 sm:grid-cols-2">
+					{testimonials.map((t) => <TestimonialCard testimonial={t} />)}
+				</div>
+			</Section>
+		)
+	}
+
+	<Section id="contact" title="Get in touch">
+		{
+			me.email && (
+				<p class="mb-4">
+					Email me at <a href={`mailto:${me.email}`} class="font-medium underline underline-offset-4">{me.email}</a>
+				</p>
+			)
+		}
+		<SocialLinks labels />
+	</Section>
+</PageLayout>

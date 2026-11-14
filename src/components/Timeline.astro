@@ -1,0 +1,12 @@
+---
+/** A vertical timeline of entries (see lib/timeline.ts for turning collections into entries). */
+import TimelineItem from './TimelineItem.astro';
+import type { TimelineEntry } from '@/lib/timeline';
+
+type Props = { entries: TimelineEntry[] };
+const { entries } = Astro.props;
+---
+
+<ol class="grid">
+	{entries.map((entry) => <TimelineItem entry={entry} />)}
+</ol>

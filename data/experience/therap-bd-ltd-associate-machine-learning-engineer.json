@@ -1,0 +1,21 @@
+{
+  "title": "Associate Machine Learning Engineer",
+  "organization": {
+    "name": "Therap BD Ltd",
+    "url": "https://therapbd.com",
+    "location": "Dhaka, Bangladesh"
+  },
+  "employmentType": "full-time",
+  "arrangement": "on-site",
+  "location": "Dhaka, Bangladesh",
+  "start": "2026-02-01",
+  "current": true,
+  "description": "<p>Therap (BD) Ltd. is a US-based Software Company registered in Bangladesh, operating since 2004. We have our office in Dhaka, Bangladesh, and affiliate offices in the USA and Canada.</p>",
+  "skills": [
+    "FastAPI",
+    "PyTorch",
+    "Python"
+  ],
+  "featured": true,
+  "order": 1
+}

@@ -1,0 +1,60 @@
+/* Project showcase (Showcase.astro): the cover stands turned in perspective, with a reflection fading out below it,
+   directly on the page background (no card, no stage color). Mask colors are opacity only. Sizes
+   use container units, so portrait and landscape covers both fit the stage. */
+.showcase {
+	position: relative;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	container-type: size;
+	perspective: 1100px;
+	/* Transparent: the image and its reflection sit directly on the page background. */
+	background: transparent;
+}
+.showcase[data-size='hero'] {
+	aspect-ratio: 16 / 8;
+}
+.showcase-object {
+	position: relative;
+	transform: translateY(-9cqh) rotateX(8deg) rotateY(-22deg) rotateZ(1deg);
+	transform-style: preserve-3d;
+	transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.group:hover .showcase-object,
+.showcase[data-size='hero']:hover .showcase-object {
+	transform: translateY(-9cqh) rotateX(4deg) rotateY(-10deg);
+}
+.showcase-image {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 58cqw;
+	max-height: 56cqh;
+	border-radius: 0.5rem;
+	/* drop-shadow follows the image's own outline: a transparent PNG/SVG casts the shape of its
+	   object, not a rectangle around it (box-shadow would read as a border and background). */
+	filter: drop-shadow(0 1px 1px var(--object-shadow)) drop-shadow(0 14px 18px var(--object-shadow));
+}
+.showcase[data-size='hero'] .showcase-image {
+	max-width: 46cqw;
+	max-height: 60cqh;
+}
+/* The mirror: flipped below the image, faint, fading out within its first half. */
+.showcase-reflection {
+	position: absolute;
+	top: calc(100% + 4px);
+	left: 0;
+	transform: scaleY(-1);
+	opacity: 0.32;
+	pointer-events: none;
+	mask-image: linear-gradient(to top, black, transparent 45%);
+}
+.showcase-reflection .showcase-image {
+	filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+	.showcase-object {
+		transition: none;
+	}
+}

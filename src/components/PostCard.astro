@@ -1,0 +1,31 @@
+---
+/** A post in a list: small cover on the left, then title, date and summary. */
+import type { CollectionEntry } from 'astro:content';
+import Img from '@/components/Img.astro';
+import PostMeta from './PostMeta.astro';
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { id, data } = post;
+---
+
+<article class="group relative flex gap-4 rounded-xl p-3 transition-colors hover:bg-muted/50 sm:gap-5">
+	{
+		data.cover && (
+			<Img
+				src={data.cover}
+				alt=""
+				widths={[160, 320]}
+				sizes="(width < 640px) 6rem, 10rem"
+				class="aspect-4/3 w-24 shrink-0 rounded-lg object-cover sm:w-40"
+			/>
+		)
+	}
+	<div class="min-w-0">
+		<h3 class="text-lg font-semibold">
+			<a href={`/blog/${id}/`} class="after:absolute after:inset-0 group-hover:underline">{data.title}</a>
+		</h3>
+		<PostMeta post={post} class="mt-1" />
+		{data.summary && <p class="mt-2 line-clamp-2 text-sm text-muted-foreground">{data.summary}</p>}
+	</div>
+</article>

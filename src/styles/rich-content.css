@@ -1,0 +1,173 @@
+/* Rich text: synced admin HTML (KaTeX math, highlight.js code, aligned media, collages, colors)
+   and hand-written Markdown (Shiki code). Used inside .rich-content (Prose.astro). */
+
+:root {
+	--rt-gray: oklch(0.55 0.02 264);
+	--rt-red: oklch(0.55 0.21 27);
+	--rt-orange: oklch(0.6 0.19 47);
+	--rt-amber: oklch(0.62 0.16 70);
+	--rt-green: oklch(0.55 0.16 150);
+	--rt-teal: oklch(0.56 0.11 185);
+	--rt-blue: oklch(0.52 0.2 262);
+	--rt-violet: oklch(0.52 0.23 293);
+	--rt-pink: oklch(0.57 0.21 354);
+	--rt-hl-yellow: oklch(0.95 0.12 100);
+	--rt-hl-green: oklch(0.93 0.08 155);
+	--rt-hl-blue: oklch(0.9 0.06 250);
+	--rt-hl-pink: oklch(0.91 0.06 350);
+	--rt-hl-violet: oklch(0.9 0.06 295);
+	--rt-hl-orange: oklch(0.91 0.07 60);
+}
+.dark {
+	--rt-gray: oklch(0.72 0.02 264);
+	--rt-red: oklch(0.7 0.18 25);
+	--rt-orange: oklch(0.75 0.16 50);
+	--rt-amber: oklch(0.8 0.15 80);
+	--rt-green: oklch(0.75 0.15 150);
+	--rt-teal: oklch(0.75 0.11 185);
+	--rt-blue: oklch(0.72 0.15 255);
+	--rt-violet: oklch(0.72 0.17 293);
+	--rt-pink: oklch(0.74 0.16 354);
+	--rt-hl-yellow: oklch(0.45 0.09 95);
+	--rt-hl-green: oklch(0.42 0.08 155);
+	--rt-hl-blue: oklch(0.42 0.09 255);
+	--rt-hl-pink: oklch(0.42 0.1 350);
+	--rt-hl-violet: oklch(0.42 0.1 295);
+	--rt-hl-orange: oklch(0.45 0.1 55);
+}
+
+/* Aligned media in rich content (editor align buttons on a selected image, collage, audio or
+   YouTube embed). Left/right float at half width with text wrapping beside them (full width on
+   phones), center keeps the natural size, justify spans the column. Unlayered so it wins over the
+   typography plugin's image margins. */
+.rich-content img[data-align] {
+	display: block;
+}
+.rich-content img[data-align='center'] {
+	margin-inline: auto;
+}
+.rich-content div[data-youtube-video]:has(> iframe[data-align='center']) {
+	width: 75%;
+	margin-inline: auto;
+}
+.rich-content :is(img, figure)[data-align='justify'] {
+	width: 100%;
+}
+@media (width >= 40rem) {
+	.rich-content :is(img, figure)[data-align='left'],
+	.rich-content div[data-youtube-video]:has(> iframe[data-align='left']) {
+		float: left;
+		width: 50%;
+		margin: 0.25rem 1.5rem 0.75rem 0;
+	}
+	.rich-content :is(img, figure)[data-align='right'],
+	.rich-content div[data-youtube-video]:has(> iframe[data-align='right']) {
+		float: right;
+		width: 50%;
+		margin: 0.25rem 0 0.75rem 1.5rem;
+	}
+}
+/* Headings start below floated media; the content box contains its floats. */
+.rich-content :is(h1, h2, h3, h4) {
+	clear: both;
+}
+.rich-content::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+
+@layer components {
+	.rich-content :is(code, pre) {
+		font-family: var(--font-mono);
+		font-variant-ligatures: contextual;
+	}
+	.rich-content figure[data-type='media-collage'] {
+		display: grid;
+		gap: 0.5rem;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.rich-content figure[data-type='media-collage'][data-columns='1'] {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.rich-content figure[data-type='media-collage'][data-columns='2'] {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.rich-content figure[data-type='media-collage'][data-columns='4'] {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+	.rich-content figure[data-type='media-collage'] img {
+		margin: 0;
+		aspect-ratio: 1;
+		width: 100%;
+		object-fit: cover;
+		border-radius: var(--radius-md);
+	}
+	.rich-content figure[data-type='media-collage'] figcaption {
+		grid-column: 1 / -1;
+	}
+	.rich-content figure[data-type='media-embed'] :is(video, audio) {
+		width: 100%;
+		border-radius: var(--radius-md);
+	}
+	.rich-content div[data-youtube-video] iframe {
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-md);
+	}
+	.rich-content :is(td, th) {
+		border: 1px solid var(--color-border);
+		padding: 0.25rem 0.5rem;
+	}
+	/* Display math scrolls sideways instead of widening the page. */
+	.rich-content :is(.katex-display, [data-type='block-math']) {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+
+	/* highlight.js token classes (code in synced admin posts) */
+	.hljs-comment,
+	.hljs-quote {
+		color: var(--color-muted-foreground);
+		font-style: italic;
+	}
+	.hljs-keyword,
+	.hljs-selector-tag,
+	.hljs-built_in {
+		color: var(--rt-violet);
+	}
+	.hljs-string,
+	.hljs-attr,
+	.hljs-template-tag {
+		color: var(--rt-green);
+	}
+	.hljs-number,
+	.hljs-literal,
+	.hljs-symbol {
+		color: var(--rt-orange);
+	}
+	.hljs-title,
+	.hljs-function,
+	.hljs-section {
+		color: var(--rt-blue);
+	}
+	.hljs-type,
+	.hljs-variable,
+	.hljs-meta {
+		color: var(--rt-teal);
+	}
+
+	/* Shiki (code in hand-written Markdown): both themes are emitted, the class picks one. */
+	.astro-code,
+	.astro-code span {
+		color: var(--shiki-light);
+		background-color: var(--shiki-light-bg);
+	}
+	.dark .astro-code,
+	.dark .astro-code span {
+		color: var(--shiki-dark);
+		background-color: var(--shiki-dark-bg);
+	}
+}

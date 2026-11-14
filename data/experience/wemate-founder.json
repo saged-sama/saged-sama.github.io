@@ -1,0 +1,21 @@
+{
+  "title": "Founder",
+  "organization": {
+    "name": "Wemate",
+    "url": "https://wemate.io",
+    "location": "Dhaka, Bangladesh"
+  },
+  "employmentType": "self-employed",
+  "arrangement": "hybrid",
+  "location": "Dhaka, Bangladesh",
+  "start": "2024-07-15",
+  "current": true,
+  "description": "<p>Our own startup aiming to bring Software Solutions to ease many of people's everyday endeavours</p>",
+  "skills": [
+    "SvelteKit",
+    "JavaScript"
+  ],
+  "url": "https://wemate.io",
+  "featured": true,
+  "order": 0
+}

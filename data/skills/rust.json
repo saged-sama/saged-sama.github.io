@@ -1,0 +1,8 @@
+{
+  "name": "Rust",
+  "category": "Languages",
+  "level": "beginner",
+  "icon": "simple-icons:rust",
+  "featured": true,
+  "order": 2
+}

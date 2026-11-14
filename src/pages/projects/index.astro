@@ -1,0 +1,20 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { profile, projects } from '@/lib/content';
+
+const [me, all] = await Promise.all([profile(), projects()]);
+---
+
+<PageLayout title={`Projects · ${me.name}`} description={`Projects by ${me.name}.`}>
+	<h1>Projects</h1>
+	{
+		all.length ? (
+			<div class="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+				{all.map((project) => <ProjectCard project={project} />)}
+			</div>
+		) : (
+			<p class="mt-8 text-muted-foreground">No projects yet.</p>
+		)
+	}
+</PageLayout>

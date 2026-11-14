@@ -1,0 +1,14 @@
+---
+/**
+ * Astro's optimized <Image>, except SVGs are passed through unchanged (they're already as small
+ * and sharp as they get, and Astro doesn't rasterize them). Use this for every local image.
+ */
+import { Image } from 'astro:assets';
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof Image>;
+const props = Astro.props;
+const isSvg = typeof props.src === 'object' && 'format' in props.src && props.src.format === 'svg';
+---
+
+{isSvg ? <Image {...props} format="svg" widths={undefined} densities={undefined} /> : <Image {...props} />}

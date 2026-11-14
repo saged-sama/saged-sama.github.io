@@ -1,0 +1,19 @@
+{
+  "degree": "HSC",
+  "field": "Science",
+  "level": "high_school",
+  "grade": "5.00",
+  "organization": {
+    "name": "Ananda Mohan College"
+  },
+  "location": "Mymensingh, Bangladesh",
+  "start": "2018-04-01",
+  "end": "2020-04-30",
+  "skills": [
+    "C/C++",
+    "Mathematics",
+    "Python"
+  ],
+  "featured": true,
+  "order": 1
+}

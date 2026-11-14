@@ -1,0 +1,8 @@
+{
+  "name": "FastAPI",
+  "category": "Libraries",
+  "level": "intermediate",
+  "icon": "simple-icons:fastapi",
+  "featured": true,
+  "order": 4
+}

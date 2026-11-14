@@ -1,0 +1,8 @@
+{
+  "name": "SvelteKit",
+  "category": "Frameworks",
+  "level": "expert",
+  "icon": "simple-icons:svelte",
+  "featured": true,
+  "order": 3
+}

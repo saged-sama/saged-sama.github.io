@@ -1,0 +1,15 @@
+{
+  "degree": "BSc",
+  "field": "Computer Science and Engineering",
+  "level": "bachelor",
+  "organization": {
+    "name": "University of Dhaka",
+    "url": "https://www.du.ac.bd",
+    "location": "Dhaka, Bangladesh"
+  },
+  "location": "Dhaka, Bangladesh",
+  "start": "2022-02-09",
+  "end": "2026-01-20",
+  "featured": true,
+  "order": 0
+}

@@ -1,0 +1,35 @@
+---
+/** The long bio, with languages and hobbies beside it. */
+import Prose from './Prose.astro';
+import Tags from './Tags.astro';
+import { profile } from '@/lib/content';
+
+const { bio, languages, hobbies } = await profile();
+const level = (text?: string) => (text ? ` (${text})` : '');
+---
+
+<div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_14rem]">
+	<Prose html={bio} />
+	<dl class="grid content-start gap-5 text-sm">
+		{
+			languages.length > 0 && (
+				<div>
+					<dt class="mb-2 font-medium text-muted-foreground">Languages</dt>
+					<dd>
+						<Tags items={languages.map((l) => `${l.name}${level(l.level)}`)} variant="outline" />
+					</dd>
+				</div>
+			)
+		}
+		{
+			hobbies.length > 0 && (
+				<div>
+					<dt class="mb-2 font-medium text-muted-foreground">Hobbies</dt>
+					<dd>
+						<Tags items={hobbies} variant="outline" />
+					</dd>
+				</div>
+			)
+		}
+	</dl>
+</div>

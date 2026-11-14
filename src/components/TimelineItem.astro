@@ -1,0 +1,72 @@
+---
+/** One timeline row: logo (or icon) on the rail, then title, details, description and tags. */
+import Img from '@/components/Img.astro';
+import ExternalLink from '@lucide/astro/icons/external-link';
+import Icon from './Icon.astro';
+import Prose from './Prose.astro';
+import Tags from './Tags.astro';
+import { isoDay } from '@/lib/dates';
+import type { TimelineEntry } from '@/lib/timeline';
+
+type Props = { entry: TimelineEntry };
+const { entry } = Astro.props;
+---
+
+<li class="relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-4 pb-8 last:pb-0">
+	<!-- The rail between markers. -->
+	<span class="absolute top-11 bottom-1 left-5 w-px -translate-x-1/2 bg-border" aria-hidden="true"></span>
+	<div class="grid size-10 place-items-center overflow-hidden rounded-full border bg-card text-muted-foreground">
+		{
+			entry.logo ? (
+				<Img src={entry.logo} alt="" width={40} height={40} densities={[1, 2]} class="size-full object-cover" />
+			) : (
+				<Icon name={entry.icon} fallback="lucide:circle" class="size-4" />
+			)
+		}
+	</div>
+	<div class="min-w-0">
+		<div class="flex flex-wrap items-baseline justify-between gap-x-4">
+			<h3 class="text-base font-semibold">{entry.title}</h3>
+			{
+				entry.period && (
+					<time datetime={isoDay(entry.date)} class="num text-sm text-muted-foreground">
+						{entry.period}
+					</time>
+				)
+			}
+		</div>
+		{
+			entry.subtitle && (
+				<p class="text-sm text-muted-foreground">
+					{entry.subtitleUrl ? (
+						<a href={entry.subtitleUrl} rel="noopener" target="_blank" class="hover:text-foreground hover:underline">
+							{entry.subtitle}
+						</a>
+					) : (
+						entry.subtitle
+					)}
+				</p>
+			)
+		}
+		{entry.location && <p class="text-sm text-muted-foreground">{entry.location}</p>}
+		{entry.summary && <p class="mt-2 text-sm">{entry.summary}</p>}
+		{entry.html && <Prose html={entry.html} class="prose-sm mt-2" />}
+		{
+			entry.highlights.length > 0 && (
+				<ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
+					{entry.highlights.map((h) => (
+						<li>{h}</li>
+					))}
+				</ul>
+			)
+		}
+		<Tags items={entry.tags} variant="outline" class="mt-3" />
+		{
+			entry.url && (
+				<a href={entry.url} rel="noopener" target="_blank" class="mt-2 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+					View <ExternalLink class="size-3.5" />
+				</a>
+			)
+		}
+	</div>
+</li>

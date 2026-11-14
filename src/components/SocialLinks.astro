@@ -1,0 +1,40 @@
+---
+/**
+ * The owner's social links as icon buttons (`labels` adds the name next to each icon).
+ * Links without their own icon use the platform's default.
+ */
+import Icon from './Icon.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { list } from '@/lib/content';
+import { PLATFORM_ICONS } from '@/lib/icons';
+
+type Props = { labels?: boolean; class?: string };
+const { labels = false, class: className = '' } = Astro.props;
+
+const links = (await list('social')).map(({ data }) => ({
+	...data,
+	name: data.label ?? data.platform,
+	href: data.platform === 'email' && !data.url.startsWith('mailto:') ? `mailto:${data.url}` : data.url
+}));
+---
+
+{
+	links.length > 0 && (
+		<ul class={`flex flex-wrap items-center gap-1 ${className}`}>
+			{links.map((link) => (
+				<li>
+					<a
+						href={link.href}
+						rel="me noopener"
+						target="_blank"
+						title={labels ? undefined : link.name}
+						class={buttonVariants({ variant: labels ? 'outline' : 'ghost', size: labels ? 'sm' : 'icon' })}
+					>
+						<Icon name={link.icon ?? PLATFORM_ICONS[link.platform]} fallback="lucide:link" class="size-4" />
+						<span class={labels ? '' : 'sr-only'}>{link.name}</span>
+					</a>
+				</li>
+			))}
+		</ul>
+	)
+}

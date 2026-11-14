@@ -1,0 +1,4 @@
+minimumReleaseAgeExclude:
+  - '@astrojs/react-renderer@0.1.3'
+  - '@astrojs/react@7.1.9'
+  - '@astrojs/sitemap@3.7.5'

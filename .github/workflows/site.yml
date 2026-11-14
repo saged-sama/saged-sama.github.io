@@ -1,0 +1,85 @@
+# Syncs content from portfolio-admin, updates the GitHub profile, builds and deploys the site.
+# Runs on pushes to main and on demand. The daily run is started by the `saged-sama` repo's
+# metrics workflow (workflow_dispatch), so this repo has no schedule of its own.
+name: Site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One run at a time; a newer run waits instead of cancelling a deploy halfway.
+concurrency:
+  group: site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # commit synced content back
+    steps:
+      - uses: actions/checkout@v7
+
+      # The profile repo, so the sync can update its README.
+      - uses: actions/checkout@v7
+        with:
+          repository: saged-sama/saged-sama
+          token: ${{ secrets.GH_PROFILE_TOKEN }}
+          path: profile
+
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Sync from portfolio-admin
+        run: pnpm sync
+        env:
+          POCKETBASE_URL: ${{ secrets.POCKETBASE_URL }}
+          POCKETBASE_API_KEY: ${{ secrets.POCKETBASE_API_KEY }}
+          GH_PROFILE_TOKEN: ${{ secrets.GH_PROFILE_TOKEN }}
+          PROFILE_README: profile/README.md
+
+      # Pushed with the built-in token, which doesn't start another run.
+      - name: Commit synced content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only the sync has changed anything at this point (profile/ is gitignored).
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Sync content from portfolio-admin"
+            git push
+          fi
+
+      - name: Push profile README
+        working-directory: profile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Update README from portfolio"
+            git push
+          fi
+
+      - run: pnpm build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

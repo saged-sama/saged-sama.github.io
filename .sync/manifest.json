@@ -1,0 +1,144 @@
+{
+  "files": {
+    "blogs/brief-introduction-to-bangladeshi-snakes.md": {
+      "version": "abdd0fc8b8186e57761d124a326aca9c510e0a967c7b0473a8934f6233cbfdff",
+      "sha": "abdd0fc8b8186e57761d124a326aca9c510e0a967c7b0473a8934f6233cbfdff"
+    },
+    "data/achievements/champion-at-the-national-round-in-the-secondary-category-at-the-bangladesh-mathe.json": {
+      "version": "d1e56e0292dbe35e502cd1995b59bd2e002be6e5ccecf8ba523622c6eeb80da4",
+      "sha": "d1e56e0292dbe35e502cd1995b59bd2e002be6e5ccecf8ba523622c6eeb80da4"
+    },
+    "data/education/ananda-mohan-college-hsc.json": {
+      "version": "f6fae2b841b15b657df69156e40de3ed6d3f2d732d2310ccff31545dca9c548c",
+      "sha": "f6fae2b841b15b657df69156e40de3ed6d3f2d732d2310ccff31545dca9c548c"
+    },
+    "data/education/mymensingh-zilla-school-ssc.json": {
+      "version": "082b4bbac9fc1cfdec84d119899bcdbefa3879195a85ac82e40c3bf0a9d9f08f",
+      "sha": "082b4bbac9fc1cfdec84d119899bcdbefa3879195a85ac82e40c3bf0a9d9f08f"
+    },
+    "data/education/university-of-dhaka-bsc.json": {
+      "version": "238936de50737d5a94aa75e32dbc97a8fcd4c9968e81ec6630664463432cefd7",
+      "sha": "238936de50737d5a94aa75e32dbc97a8fcd4c9968e81ec6630664463432cefd7"
+    },
+    "data/experience/merilsoft-llc-ai-engineer-intern.json": {
+      "version": "d578bff7c62466b6f5ed40a93a82cf6ebc793c6c3fee239cf097ef8a454826ef",
+      "sha": "d578bff7c62466b6f5ed40a93a82cf6ebc793c6c3fee239cf097ef8a454826ef"
+    },
+    "data/experience/therap-bd-ltd-associate-machine-learning-engineer.json": {
+      "version": "af3d6448d9da98c88288d31961f6934251d407ad3d2af82b8987972ec01ef50d",
+      "sha": "af3d6448d9da98c88288d31961f6934251d407ad3d2af82b8987972ec01ef50d"
+    },
+    "data/experience/university-of-dhaka-part-time-software-engineer.json": {
+      "version": "60f275018c4b146b62725b6a9d8b631ca60f7e5a8b9392708c75edfc84a02f62",
+      "sha": "60f275018c4b146b62725b6a9d8b631ca60f7e5a8b9392708c75edfc84a02f62"
+    },
+    "data/experience/wemate-founder.json": {
+      "version": "fa9254bcfbc11a07beae6177c1dbf19ef37bd608419f40cede54569571468847",
+      "sha": "fa9254bcfbc11a07beae6177c1dbf19ef37bd608419f40cede54569571468847"
+    },
+    "data/life-events/national-champion-secondary-category-bangladesh-mathematical-olympiad-bdmo.json": {
+      "version": "ef12ad9a5df7f288226b9223d4401c9d3c3047b4b600e14148393ad163ae651c",
+      "sha": "ef12ad9a5df7f288226b9223d4401c9d3c3047b4b600e14148393ad163ae651c"
+    },
+    "data/profile.json": {
+      "version": "1c8b4ffd15d493625dc802fdf63e5f6aed82286a9e992130dc2606c428045a29",
+      "sha": "1c8b4ffd15d493625dc802fdf63e5f6aed82286a9e992130dc2606c428045a29"
+    },
+    "data/projects/english360.md": {
+      "version": "8e1c3d72f7f29556de789c00985ff34c78095aab9369c0258d7f153fc6c30195",
+      "sha": "8e1c3d72f7f29556de789c00985ff34c78095aab9369c0258d7f153fc6c30195"
+    },
+    "data/projects/lessonq.md": {
+      "version": "b2d01295682254a6d44c06d92b9ddc06208552c79ab8e5fd82a5c7b8402d87cf",
+      "sha": "b2d01295682254a6d44c06d92b9ddc06208552c79ab8e5fd82a5c7b8402d87cf"
+    },
+    "data/projects/wemate-crm.md": {
+      "version": "c95e8da5c49554ec5c1877586a208afb37cb08c653d3636ba6df7a71c2396790",
+      "sha": "c95e8da5c49554ec5c1877586a208afb37cb08c653d3636ba6df7a71c2396790"
+    },
+    "data/skills/c-c.json": {
+      "version": "dd7a5edb886dad3f37fd2413fe823fd7426cd287f1fa2dee7c97ec25a7f0d23f",
+      "sha": "dd7a5edb886dad3f37fd2413fe823fd7426cd287f1fa2dee7c97ec25a7f0d23f"
+    },
+    "data/skills/competitive-programming.json": {
+      "version": "bb19e6cd3024bdaedd739d8ab7bcc692c22f2a7724a8f1d10d11aee0fd539f5d",
+      "sha": "bb19e6cd3024bdaedd739d8ab7bcc692c22f2a7724a8f1d10d11aee0fd539f5d"
+    },
+    "data/skills/fastapi.json": {
+      "version": "7c297ef5a66129fb9cafde5d71fa816e58b819933192c8ca5c03e33fd1317c1f",
+      "sha": "7c297ef5a66129fb9cafde5d71fa816e58b819933192c8ca5c03e33fd1317c1f"
+    },
+    "data/skills/javascript.json": {
+      "version": "1283c54354071930566f9a2f8d81a72828fb5b4205a81acceb8b557f926e13b0",
+      "sha": "1283c54354071930566f9a2f8d81a72828fb5b4205a81acceb8b557f926e13b0"
+    },
+    "data/skills/mathematics.json": {
+      "version": "ec4e6479f634ec11e431a476945a767f3540424c770f02720e7a216e788cbb17",
+      "sha": "ec4e6479f634ec11e431a476945a767f3540424c770f02720e7a216e788cbb17"
+    },
+    "data/skills/nextjs.json": {
+      "version": "61a3394b64ed796af9cb87aa75cc1d481ee3a3ca92f40a580add6e1f3a814d90",
+      "sha": "61a3394b64ed796af9cb87aa75cc1d481ee3a3ca92f40a580add6e1f3a814d90"
+    },
+    "data/skills/python.json": {
+      "version": "afcce77433e76d16f442516b8495da676da9c1a6455d9ef803efd288911fe694",
+      "sha": "afcce77433e76d16f442516b8495da676da9c1a6455d9ef803efd288911fe694"
+    },
+    "data/skills/pytorch.json": {
+      "version": "b82167de8f4dd002ba74d43f2297ebcbe93443c37f556dc7da9aaf75826d4a85",
+      "sha": "b82167de8f4dd002ba74d43f2297ebcbe93443c37f556dc7da9aaf75826d4a85"
+    },
+    "data/skills/rust.json": {
+      "version": "a29e2a483347e3ad399ef6f83ba3d1efbe73d5475a1cfb5f605feaae2bbba9c8",
+      "sha": "a29e2a483347e3ad399ef6f83ba3d1efbe73d5475a1cfb5f605feaae2bbba9c8"
+    },
+    "data/skills/sveltekit.json": {
+      "version": "d21004a8b32c137a311cf86cea2154d0765ac95059c9b05940fac9a2027aa030",
+      "sha": "d21004a8b32c137a311cf86cea2154d0765ac95059c9b05940fac9a2027aa030"
+    },
+    "data/social/github.json": {
+      "version": "b40ec9e327aaab2bb6db499466da268bdf0892f005695393387afacf99767b15",
+      "sha": "b40ec9e327aaab2bb6db499466da268bdf0892f005695393387afacf99767b15"
+    },
+    "data/social/linkedin.json": {
+      "version": "89e7a9c13af441de1c66033e5a204ec0789c11e3742e01d28caede6e4b07f832",
+      "sha": "89e7a9c13af441de1c66033e5a204ec0789c11e3742e01d28caede6e4b07f832"
+    },
+    "images/835gewfqv4qd77s.webp": {
+      "version": "08f53202_fe74_483f_97e1_cbec5554cf24_bkaxff5hsr.webp",
+      "sha": "67df78d0a9365899059c9ac26d5c7edaa91a845b6fceb37526091aeadc7a0256"
+    },
+    "images/9mmzdzt150thjkz.webp": {
+      "version": "542758280_4145322319068068_6637716013622935460_n_1m4qhecw67.webp",
+      "sha": "b8a558b33fbdd5620a9bd94cc34bff110777d08a3b3bda6fcddb080362e6470c"
+    },
+    "images/cb9jhwu6uv7p476.webp": {
+      "version": "screenshot_from_2026_10_30_19_57_48_dd07pmdhwx.webp",
+      "sha": "a0cb9e8eb3f266e72fcdba5755528943490036d9afb241330328b4d4be569e4e"
+    },
+    "images/mri21e8vi0ea144.webp": {
+      "version": "screenshot_from_2026_11_11_23_37_19_r7bx1n51nk.webp",
+      "sha": "56ab26318b2bb51ed414033e06ba4ce5c2177d6da7153673ba77eb1cac840502"
+    },
+    "images/qyl8nuj0nkvuz7y.svg": {
+      "version": "crm_wwhk2c71m0.svg",
+      "sha": "e68a1ff677d3b957a4e11d4edaca4d96d8adf3e5bfb403dcb9a67e0b9a1ed0bc"
+    },
+    "images/t39xxp1lc8p0l4f.webp": {
+      "version": "1772048629495_tq97wz5h22.webp",
+      "sha": "38501ffdb87496b3abc81e5797f6cff26c42096fe52b9a9ad47cae2683670807"
+    },
+    "public/media/0mp1kvc8wn4kdif.jpeg": {
+      "version": "images_1_nsv59f3854.jpeg",
+      "sha": "d04fca69179bc93ba8819dc4d7c6698482ab8ef5e0dba22aefa8f785f2ac0327"
+    },
+    "public/media/0ucsf6ox3l0ilxx.webp": {
+      "version": "checkered_keelback_xenochrophis_piscator_schneider_1799_assam_by_dr_raju_kasambe_dsc_0477_2_x59fj5i15g.webp",
+      "sha": "9ba7232b3619a541bd059aace91ce40f17d25ce0b4ffbb2c05f682ee56a34443"
+    },
+    "public/media/2n0idrrrql01axj.pdf": {
+      "version": "mahmudul_hasan_resume_g1w7sfv3gc.pdf",
+      "sha": "1b9fea33344c23c3e991551443104f6d12b923311ed6e20a41d706cc2a470f1b"
+    }
+  }
+}

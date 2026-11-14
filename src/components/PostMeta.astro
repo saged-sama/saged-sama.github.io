@@ -1,0 +1,15 @@
+---
+/** "Oct 31, 2026 · 5 min read" for a post. */
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, isoDay } from '@/lib/dates';
+import { readingTime } from '@/lib/reading-time';
+
+type Props = { post: CollectionEntry<'blog'>; class?: string };
+const { post, class: className = '' } = Astro.props;
+---
+
+<p class={`num text-sm text-muted-foreground ${className}`}>
+	<time datetime={isoDay(post.data.date)}>{formatDate(post.data.date)}</time>
+	<span aria-hidden="true"> · </span>
+	{readingTime(post)} min read
+</p>

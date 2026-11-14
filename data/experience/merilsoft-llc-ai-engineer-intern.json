@@ -1,0 +1,22 @@
+{
+  "title": "AI Engineer Intern",
+  "organization": {
+    "name": "Merilsoft LLC"
+  },
+  "employmentType": "full-time",
+  "arrangement": "remote",
+  "location": "Dhaka, Bangladesh",
+  "start": "2025-08-01",
+  "end": "2025-10-31",
+  "description": "<p>Merilsoft LLC was a US-Based Bangladeshi startup Software Company</p>",
+  "highlights": [
+    "Built and managed a Magazine generator Agent development"
+  ],
+  "skills": [
+    "FastAPI",
+    "Python",
+    "JavaScript"
+  ],
+  "featured": true,
+  "order": 2
+}

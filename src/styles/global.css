@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
+@import "./theme.css";
+@import "./rich-content.css";
+@import "./showcase.css";
+
+/* Content outside src/ that uses Tailwind classes (synced rich text never does, but be safe). */
+@source "../../data";
+@source "../../blogs";
+
+/* The theme follows the `dark` class on <html>, set before first paint (ThemeToggle.astro). */
+@custom-variant dark (&:is(.dark *));
 
 @font-face {
     font-family: 'Inter';
@@ -17,28 +30,38 @@
     font-display: swap;
 }
 
-@theme {
-    --font-sans: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    html {
+        @apply font-sans;
+        color-scheme: light;
+    }
+    html.dark {
+        color-scheme: dark;
+    }
+    body {
+        @apply bg-background text-foreground text-base antialiased;
+        font-feature-settings: "cv11" 1;
+        /* Long words and URLs wrap instead of widening the page. */
+        overflow-wrap: anywhere;
+    }
+    code {
+        @apply font-mono text-sm;
+    }
+    h1 {
+        @apply font-bold text-4xl tracking-tight text-balance;
+    }
+    h2 {
+        @apply font-semibold text-3xl tracking-tight text-balance;
+    }
+    h3 {
+        @apply font-semibold text-2xl text-balance;
+    }
 }
 
-body {
-    @apply font-sans text-base;
-    font-feature-settings: "cv11" 1;
-}
-
-code {
-    @apply font-mono text-sm;
-}
-
-h1 {
-    @apply font-bold text-4xl;
-}
-
-h2 {
-    @apply font-semibold text-3xl;
-}
-
-h3 {
-    @apply font-semibold text-2xl;
+/* Numbers (dates, counts) with fixed-width digits. */
+@utility num {
+    font-variant-numeric: tabular-nums;
 }

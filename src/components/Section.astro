@@ -1,0 +1,22 @@
+---
+/** A titled block of a page, with an optional "See all" link to the full list. */
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+
+type Props = { id: string; title: string; href?: string; hrefLabel?: string; class?: string };
+const { id, title, href, hrefLabel = 'See all', class: className = '' } = Astro.props;
+---
+
+<section id={id} aria-labelledby={`${id}-title`} class={`scroll-mt-20 py-10 ${className}`}>
+	<div class="mb-6 flex items-baseline justify-between gap-4">
+		<h2 id={`${id}-title`} class="text-2xl">{title}</h2>
+		{
+			href && (
+				<a href={href} class="inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+					{hrefLabel}
+					<ArrowRight class="size-4" />
+				</a>
+			)
+		}
+	</div>
+	<slot />
+</section>

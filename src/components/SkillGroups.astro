@@ -1,0 +1,28 @@
+---
+/** Skills grouped by category, each with its icon. */
+import { Badge } from '@/components/ui/badge';
+import Icon from './Icon.astro';
+import { skillGroups } from '@/lib/content';
+
+const groups = await skillGroups();
+---
+
+<div class="grid gap-6 sm:grid-cols-2">
+	{
+		groups.map(({ category, skills }) => (
+			<div>
+				<h3 class="mb-2 text-sm font-medium text-muted-foreground">{category}</h3>
+				<ul class="flex flex-wrap gap-2">
+					{skills.map(({ data }) => (
+						<li>
+							<Badge variant="outline" className="h-7 gap-1.5 px-2.5 text-sm">
+								<Icon name={data.icon} class="size-3.5" />
+								{data.name}
+							</Badge>
+						</li>
+					))}
+				</ul>
+			</div>
+		))
+	}
+</div>

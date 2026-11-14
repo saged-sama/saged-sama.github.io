@@ -1,0 +1,8 @@
+{
+  "name": "Mathematics",
+  "category": "Problem Solving",
+  "level": "advanced",
+  "icon": "tabler:math-pi",
+  "featured": true,
+  "order": 7
+}

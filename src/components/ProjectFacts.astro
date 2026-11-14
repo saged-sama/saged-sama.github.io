@@ -1,0 +1,48 @@
+---
+/** The project's details under its title: period, role, team, client, and its links. */
+import type { CollectionEntry } from 'astro:content';
+import ExternalLink from '@lucide/astro/icons/external-link';
+import Github from '@lucide/astro/icons/code-xml';
+import { buttonVariants } from '@/components/ui/button';
+import { formatPeriod } from '@/lib/dates';
+
+type Props = { project: CollectionEntry<'projects'> };
+const { data } = Astro.props.project;
+
+const facts = [
+	{ label: 'When', value: formatPeriod(data) },
+	{ label: 'Role', value: data.role },
+	{ label: 'Team', value: data.teamSize ? `${data.teamSize} people` : undefined },
+	{ label: 'Client', value: data.client?.name }
+].filter((f) => f.value);
+const links = [
+	...(data.liveUrl ? [{ label: 'Visit', url: data.liveUrl, primary: true }] : []),
+	...(data.repoUrl ? [{ label: 'Source', url: data.repoUrl, primary: false }] : []),
+	...data.links.map((l) => ({ ...l, primary: false }))
+];
+---
+
+{
+	facts.length > 0 && (
+		<dl class="flex flex-wrap gap-x-8 gap-y-2 text-sm">
+			{facts.map((f) => (
+				<div>
+					<dt class="text-muted-foreground">{f.label}</dt>
+					<dd class="num font-medium">{f.value}</dd>
+				</div>
+			))}
+		</dl>
+	)
+}
+{
+	links.length > 0 && (
+		<div class="flex flex-wrap gap-2">
+			{links.map((l) => (
+				<a href={l.url} rel="noopener" target="_blank" class={buttonVariants({ size: 'sm', variant: l.primary ? 'default' : 'outline' })}>
+					{l.label === 'Source' ? <Github /> : <ExternalLink />}
+					{l.label}
+				</a>
+			))}
+		</div>
+	)
+}

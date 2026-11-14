@@ -1,0 +1,19 @@
+---
+/** A row of small labels (tags, skills, categories). */
+import { Badge } from '@/components/ui/badge';
+
+type Props = { items: string[]; variant?: 'secondary' | 'outline'; class?: string };
+const { items, variant = 'secondary', class: className = '' } = Astro.props;
+---
+
+{
+	items.length > 0 && (
+		<ul class={`flex flex-wrap gap-1.5 ${className}`}>
+			{items.map((item) => (
+				<li>
+					<Badge variant={variant}>{item}</Badge>
+				</li>
+			))}
+		</ul>
+	)
+}

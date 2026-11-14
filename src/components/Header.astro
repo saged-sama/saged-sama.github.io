@@ -1,0 +1,35 @@
+---
+/** Site header: name (home link), main navigation and the theme switch. */
+import ThemeToggle from './ThemeToggle.astro';
+import { profile } from '@/lib/content';
+
+const { name, resume } = await profile();
+const path = Astro.url.pathname;
+
+const links = [
+	{ href: '/projects/', label: 'Projects' },
+	{ href: '/blog/', label: 'Blog' },
+	...(resume ? [{ href: resume, label: 'Résumé' }] : [])
+];
+const isCurrent = (href: string) => href.startsWith('/') && path.startsWith(href);
+---
+
+<header class="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
+	<div class="mx-auto flex h-14 max-w-5xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
+		<a href="/" class="mr-auto min-w-0 truncate font-semibold tracking-tight">{name}</a>
+		<nav aria-label="Main" class="flex shrink-0 items-center text-sm sm:gap-1">
+			{
+				links.map((link) => (
+					<a
+						href={link.href}
+						aria-current={isCurrent(link.href) ? 'page' : undefined}
+						class="rounded-md px-2 py-1.5 whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground aria-[current=page]:text-foreground"
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+		<ThemeToggle />
+	</div>
+</header>

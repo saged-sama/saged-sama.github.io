@@ -1,0 +1,35 @@
+---
+/**
+ * The owner's photo as a circle; clicking it opens the full photo over the page. Uses the HTML
+ * popover attribute, so it works without JavaScript (click outside or Escape closes it).
+ */
+import Img from '@/components/Img.astro';
+
+type Props = { src: ImageMetadata; alt: string };
+const { src, alt } = Astro.props;
+---
+
+<button
+	type="button"
+	popovertarget="avatar-full"
+	class="shrink-0 cursor-zoom-in rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+	aria-label={`Show larger photo: ${alt}`}
+>
+	<Img src={src} alt={alt} width={112} height={112} densities={[1, 2]} loading="eager" class="size-28 rounded-full object-cover" />
+</button>
+
+<div
+	id="avatar-full"
+	popover
+	class="m-auto max-h-[90dvh] max-w-[min(90vw,40rem)] overflow-visible bg-transparent p-0 backdrop:bg-background/80 backdrop:backdrop-blur-sm"
+>
+	<button type="button" popovertarget="avatar-full" popovertargetaction="hide" class="block cursor-zoom-out" aria-label="Close photo">
+		<Img
+			src={src}
+			alt={alt}
+			widths={[480, 960]}
+			sizes="min(90vw, 40rem)"
+			class="max-h-[90dvh] w-auto rounded-2xl object-contain shadow-2xl"
+		/>
+	</button>
+</div>

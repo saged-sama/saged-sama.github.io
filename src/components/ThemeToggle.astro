@@ -1,0 +1,32 @@
+---
+/**
+ * Light/dark switch: the only JavaScript on the site. The choice is saved in localStorage; the
+ * script in RootLayout's <head> applies it (or the system setting) before the first paint.
+ */
+import Moon from '@lucide/astro/icons/moon';
+import Sun from '@lucide/astro/icons/sun';
+import { buttonVariants } from '@/components/ui/button';
+---
+
+<button
+	type="button"
+	data-theme-toggle
+	class={buttonVariants({ variant: 'ghost', size: 'icon' })}
+	aria-label="Switch between light and dark theme"
+>
+	<Moon class="dark:hidden" />
+	<Sun class="hidden dark:block" />
+</button>
+
+<script is:inline>
+	document.querySelectorAll('[data-theme-toggle]').forEach((button) =>
+		button.addEventListener('click', () => {
+			const dark = document.documentElement.classList.toggle('dark');
+			try {
+				localStorage.setItem('theme', dark ? 'dark' : 'light');
+			} catch {
+				// Storage blocked (private mode): the choice lasts for this page only.
+			}
+		})
+	);
+</script>

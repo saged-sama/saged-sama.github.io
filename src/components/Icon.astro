@@ -1,0 +1,17 @@
+---
+/**
+ * An Iconify icon by id ("simple-icons:github", "lucide:mail", "tabler:code"), inlined as SVG at
+ * build time. Sized by font size (1em) unless a size class is given. Renders nothing for unknown ids,
+ * or `fallback` when one is set.
+ */
+import { iconSvg } from '@/lib/icons';
+
+type Props = { name?: string; fallback?: string; class?: string; label?: string };
+const { name, fallback, class: className = '', label } = Astro.props;
+
+const attributes: Record<string, string> = { class: `shrink-0 ${className}`.trim() };
+if (label) Object.assign(attributes, { 'aria-hidden': 'false', role: 'img', 'aria-label': label });
+const svg = iconSvg(name, attributes) || iconSvg(fallback, attributes);
+---
+
+{svg && <Fragment set:html={svg} />}

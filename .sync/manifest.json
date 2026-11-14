@@ -41,8 +41,8 @@
       "sha": "ef12ad9a5df7f288226b9223d4401c9d3c3047b4b600e14148393ad163ae651c"
     },
     "data/profile.json": {
-      "version": "208ca57c4d79d123469ee756abd1598cef2dc45f979d28d9d096c889fe67e4b5",
-      "sha": "208ca57c4d79d123469ee756abd1598cef2dc45f979d28d9d096c889fe67e4b5"
+      "version": "90db169e2a297d7b52639f910a3f39703ecaf8e78a27655c4c8d667b0d3a099d",
+      "sha": "90db169e2a297d7b52639f910a3f39703ecaf8e78a27655c4c8d667b0d3a099d"
     },
     "data/projects/english360.md": {
       "version": "17a557253d608ff8de9bc55995b649defe74db6540c5ae743f6f95d72922fa60",
@@ -123,6 +123,10 @@
     "images/t39xxp1lc8p0l4f.webp": {
       "version": "1772048629495_tq97wz5h22.webp",
       "sha": "38501ffdb87496b3abc81e5797f6cff26c42096fe52b9a9ad47cae2683670807"
+    },
+    "images/x0q5emw1c57zgjz.webp": {
+      "version": "ddae5c54_20e0_4d07_bfe9_c7ea620c85c4_ng6audm1r9.webp",
+      "sha": "916ef76a908a03c046e8fb502764c3da407d6e692387965976cc23f4a6407c7e"
     },
     "public/media/0mp1kvc8wn4kdif.jpeg": {
       "version": "images_1_nsv59f3854.jpeg",

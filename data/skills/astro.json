@@ -1,0 +1,10 @@
+{
+  "name": "Astro",
+  "category": "Frameworks",
+  "level": "intermediate",
+  "years": 1,
+  "url": "https://astro.build",
+  "icon": "simple-icons:astro",
+  "featured": true,
+  "order": 10
+}

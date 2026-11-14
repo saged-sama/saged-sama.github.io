@@ -56,6 +56,10 @@
       "version": "7fd4129305bb24b178b46a1061386572c9cffedb68bce7d64ba464722a2d2cb0",
       "sha": "7fd4129305bb24b178b46a1061386572c9cffedb68bce7d64ba464722a2d2cb0"
     },
+    "data/skills/astro.json": {
+      "version": "75002b7445c7b44f32201138652c0588c6e1f03b2d5eaae00a3856c81f1d21d6",
+      "sha": "75002b7445c7b44f32201138652c0588c6e1f03b2d5eaae00a3856c81f1d21d6"
+    },
     "data/skills/c-c.json": {
       "version": "dd7a5edb886dad3f37fd2413fe823fd7426cd287f1fa2dee7c97ec25a7f0d23f",
       "sha": "dd7a5edb886dad3f37fd2413fe823fd7426cd287f1fa2dee7c97ec25a7f0d23f"

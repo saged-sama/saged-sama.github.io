@@ -4,18 +4,18 @@ import Logo from './Logo.astro';
 import SocialLinks from './SocialLinks.astro';
 import { profile } from '@/lib/content';
 import { navLinks } from '@/lib/nav';
+import MapPin from "@lucide/astro/icons/map-pin";
 
 type Props = { width?: string };
 const { width = 'max-w-5xl' } = Astro.props;
-const { name, headline, location, resume } = await profile();
-const line = [headline, location].filter(Boolean).join(' · ');
+const { name, location, resume } = await profile();
 ---
 
 <footer class="mt-16 bg-muted">
 	<div class={`mx-auto grid ${width} gap-8 px-4 py-12 sm:grid-cols-[1fr_auto] sm:px-6`}>
 		<div class="grid content-start gap-3">
 			<Logo name={name} />
-			{line && <p class="text-sm text-muted-foreground">{line}</p>}
+			{location && <p class="text-sm text-muted-foreground flex items-center gap-1"><MapPin class="inline-block h-3 w-3" /> {location}</p>}
 		</div>
 		<nav aria-label="Footer" class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground sm:justify-end">
 			{navLinks(resume).map((link) => <a href={link.href} class="hover:text-foreground">{link.label}</a>)}
